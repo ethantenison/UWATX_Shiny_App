@@ -75,3 +75,6 @@ library(dplyr)
                                                                           78732, 78733,78733, 78733, 78734,78734,78734,78734,78735, 78735,78736)) #78712 is excluded, it represents UT 
         
         poverty_status_2013 <- mutate(poverty_status_2013, year = 2013)
+        
+#Binding the rows to create one dataset for poverty status 
+        poverty_status <- bind_rows(poverty_status_2013, poverty_status_2014,poverty_status_2015, poverty_status_2016, poverty_status_2017)
