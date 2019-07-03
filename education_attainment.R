@@ -126,6 +126,8 @@ education_2017 <- mutate(education_2017, year = 2017)
 
 #Binding the rows to create one dataset for educational_attainment 
 education <- bind_rows(education_2013, education_2014, education_2015, education_2016, education_2017)
+
+#Transform the values to percents
 education <- transmute(education, zipcode, estimate_total, percent_less_than_highschool = less_than_highschool/estimate_total,
                        percent_highschool_GED = high_school_GED/estimate_total, percent_associates_somecollege = 
                        associates_some_college/estimate_total, percent_bachelors_plus = bachelors_plus/estimate_total, 
