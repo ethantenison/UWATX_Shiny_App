@@ -45,7 +45,7 @@ medianRent_2014 <- filter(medianRent_2014, zipcode %in% c( 78617,78641, 78645, 7
                                                            78754, 78756, 78757, 78758,78759)) #78712 is excluded,represents UT
 
 
-medianRent_2013 <- select(medianRent_2013, zipcode, estimate_median_gross_rent, 
+medianRent_2014 <- select(medianRent_2014, zipcode, estimate_median_gross_rent, 
                           -(contains("margin")), -(geography), -(id))
 
 medianRent_2014 <- mutate(medianRent_2014, year = 2014)   
@@ -65,7 +65,7 @@ medianRent_2015 <- filter(medianRent_2015, zipcode %in% c( 78617,78641, 78645, 7
                                                            78742, 78744, 78745, 78746, 78747, 78748, 78749, 78750, 78751, 78752, 78753, 
                                                            78754, 78756, 78757, 78758,78759)) #78712 is excluded,represents UT 
 
-medianRent_2013 <- select(medianRent_2013, zipcode, estimate_median_gross_rent, 
+medianRent_2015 <- select(medianRent_2015, zipcode, estimate_median_gross_rent, 
                           -(contains("margin")), -(geography), -(id))
 
 medianRent_2015 <- mutate(medianRent_2015, year = 2015)   
@@ -85,7 +85,7 @@ medianRent_2016 <- filter(medianRent_2016, zipcode %in% c( 78617,78641, 78645, 7
                                                            78742, 78744, 78745, 78746, 78747, 78748, 78749, 78750, 78751, 78752, 78753, 
                                                            78754, 78756, 78757, 78758,78759)) #78712 is excluded,represents UT
 
-medianRent_2013 <- select(medianRent_2013, zipcode, estimate_median_gross_rent, 
+medianRent_2016 <- select(medianRent_2016, zipcode, estimate_median_gross_rent, 
                           -(contains("margin")), -(geography), -(id))
 
 medianRent_2016 <- mutate(medianRent_2016, year = 2016) 
@@ -105,7 +105,7 @@ medianRent_2017 <- filter(medianRent_2017, zipcode %in% c( 78617,78641, 78645, 7
                                                            78742, 78744, 78745, 78746, 78747, 78748, 78749, 78750, 78751, 78752, 78753, 
                                                            78754, 78756, 78757, 78758,78759)) #78712 is excluded,represents UT 
 
-medianRent_2013 <- select(medianRent_2013, zipcode, estimate_median_gross_rent, 
+medianRent_2017 <- select(medianRent_2017, zipcode, estimate_median_gross_rent, 
                           -(contains("margin")), -(geography), -(id))
 
 medianRent_2017 <- mutate(medianRent_2017, year = 2017)
