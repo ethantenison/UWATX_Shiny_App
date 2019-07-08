@@ -4,7 +4,7 @@ library(tidyverse)
 library(dplyr)
 library(janitor)
 #2013pulling the csv file into the global environment
-under6_2013<- read.csv("./ACS_Data/ACS_13_5YR_B17020_with_ann.csv") #dis wrong though =( )
+under6_2013<- read.csv("./ACS_Data/ACS_13_5YR_S0901_with_ann.csv") #
 
 
 #2013renaming column headers and filtering for Travis country zipcodes
