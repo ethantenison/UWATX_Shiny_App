@@ -18,10 +18,11 @@ education_2013 <- clean_names(education_2013)
 education_2013 <- rename(education_2013, zipcode = id2)
 education_2013 <- education_2013 %>% mutate_each(funs(as.character))
 education_2013 <- education_2013 %>% mutate_each(funs(as.numeric))
-education_2013 <- filter(education_2013, zipcode %in% c( 78641,78641, 78645, 78645, 78645, 78645 ,  
-                                                         78651,78652,78653, 78660, 78669, 78669, 78691,78701, 78702,78703, 78704, 78705, 78708, 78709 ,78710, 78711
-                                                         ,78713,78714,78715,78716,78718,78719,78720,78721,78722,78723,78724,78725,78726,78727,78728,78730,78731,
-                                                         78732, 78733,78733, 78733, 78734,78734,78734,78734,78735, 78735,78736, 78617)) #78712 is excluded,represents UT 
+education_2013 <- filter(education_2013, zipcode %in% c( 78617,78641, 78645,78651 , 78652, 78653, 78660, 78669, 78691, 78701, 78702, 78703, 78704, 78705, 
+                                                         78708, 78709, 78710 , 78711, 78713, 78714, 78715, 78716, 78718, 78719, 78720, 78721, 78722, 78723, 
+                                                         78724, 78725, 78726, 78727, 78728, 78730, 78731, 78732,78733, 78734, 78735, 78736, 78738, 78739, 78741,
+                                                         78742, 78744, 78745, 78746, 78747, 78748, 78749, 78750, 78751, 78752, 78753, 78754, 78755, 78756, 78757, 78758
+                                                         ,78759, 78760, 78761, 78762, 78763, 78764, 78765, 78766, 78767, 78768, 78769)) #78712 is excluded,represents UT 
 
 #Combining information & removing unnecessary info 
 education_2013 <- mutate(education_2013, less_than_highschool = rowSums(education_2013[,3:17]),
@@ -45,10 +46,11 @@ education_2014 <- clean_names(education_2014)
 education_2014 <- rename(education_2014, zipcode = id2)
 education_2014 <- education_2014 %>% mutate_each(funs(as.character))
 education_2014 <- education_2014 %>% mutate_each(funs(as.numeric))
-education_2014 <- filter(education_2014, zipcode %in% c( 78641,78641, 78645, 78645, 78645, 78645 ,  
-           78651,78652,78653, 78660, 78669, 78669, 78691,78701, 78702,78703, 78704, 78705, 78708, 78709 ,78710, 78711
-           ,78713,78714,78715,78716,78718,78719,78720,78721,78722,78723,78724,78725,78726,78727,78728,78730,78731,
-           78732, 78733,78733, 78733, 78734,78734,78734,78734,78735, 78735,78736, 78617)) #78712 is excluded,represents UT 
+education_2014 <- filter(education_2014, zipcode %in% c( 78617,78641, 78645,78651 , 78652, 78653, 78660, 78669, 78691, 78701, 78702, 78703, 78704, 78705, 
+                                                         78708, 78709, 78710 , 78711, 78713, 78714, 78715, 78716, 78718, 78719, 78720, 78721, 78722, 78723, 
+                                                         78724, 78725, 78726, 78727, 78728, 78730, 78731, 78732,78733, 78734, 78735, 78736, 78738, 78739, 78741,
+                                                         78742, 78744, 78745, 78746, 78747, 78748, 78749, 78750, 78751, 78752, 78753, 78754, 78755, 78756, 78757, 78758
+                                                         ,78759, 78760, 78761, 78762, 78763, 78764, 78765, 78766, 78767, 78768, 78769)) #78712 is excluded,represents UT
 education_2014 <- mutate(education_2014, less_than_highschool = rowSums(education_2014[,3:17]),
                          high_school_GED = estimate_total_regular_high_school_diploma + estimate_total_ged_or_alternative_credential
                          ,associates_some_college = estimate_total_some_college_1_or_more_years_no_degree +
@@ -67,10 +69,11 @@ education_2015 <- clean_names(education_2015)
 education_2015 <- rename(education_2015, zipcode = id2)
 education_2015 <- education_2015 %>% mutate_each(funs(as.character))
 education_2015 <- education_2015 %>% mutate_each(funs(as.numeric))
-education_2015 <- filter(education_2015, zipcode %in% c( 78641,78641, 78645, 78645, 78645, 78645 ,  
-                                                         78651,78652,78653, 78660, 78669, 78669, 78691,78701, 78702,78703, 78704, 78705, 78708, 78709 ,78710, 78711
-                                                         ,78713,78714,78715,78716,78718,78719,78720,78721,78722,78723,78724,78725,78726,78727,78728,78730,78731,
-                                                         78732, 78733,78733, 78733, 78734,78734,78734,78734,78735, 78735,78736, 78617)) #78712 is excluded,represents UT 
+education_2015 <- filter(education_2015, zipcode %in% c( 78617,78641, 78645,78651 , 78652, 78653, 78660, 78669, 78691, 78701, 78702, 78703, 78704, 78705, 
+                                                         78708, 78709, 78710 , 78711, 78713, 78714, 78715, 78716, 78718, 78719, 78720, 78721, 78722, 78723, 
+                                                         78724, 78725, 78726, 78727, 78728, 78730, 78731, 78732,78733, 78734, 78735, 78736, 78738, 78739, 78741,
+                                                         78742, 78744, 78745, 78746, 78747, 78748, 78749, 78750, 78751, 78752, 78753, 78754, 78755, 78756, 78757, 78758
+                                                         ,78759, 78760, 78761, 78762, 78763, 78764, 78765, 78766, 78767, 78768, 78769)) #78712 is excluded,represents UT 
 education_2015 <- mutate(education_2015, less_than_highschool = rowSums(education_2015[,3:17]),
                          high_school_GED = estimate_total_regular_high_school_diploma + estimate_total_ged_or_alternative_credential
                          ,associates_some_college = estimate_total_some_college_1_or_more_years_no_degree +
@@ -89,10 +92,11 @@ education_2016 <- clean_names(education_2016)
 education_2016 <- rename(education_2016, zipcode = id2)
 education_2016 <- education_2016 %>% mutate_each(funs(as.character))
 education_2016 <- education_2016 %>% mutate_each(funs(as.numeric))
-education_2016 <- filter(education_2016, zipcode %in% c( 78641,78641, 78645, 78645, 78645, 78645 ,  
-                                                         78651,78652,78653, 78660, 78669, 78669, 78691,78701, 78702,78703, 78704, 78705, 78708, 78709 ,78710, 78711
-                                                         ,78713,78714,78715,78716,78718,78719,78720,78721,78722,78723,78724,78725,78726,78727,78728,78730,78731,
-                                                         78732, 78733,78733, 78733, 78734,78734,78734,78734,78735, 78735,78736, 78617)) #78712 is excluded,represents UT 
+education_2016 <- filter(education_2016, zipcode %in% c( 78617,78641, 78645,78651 , 78652, 78653, 78660, 78669, 78691, 78701, 78702, 78703, 78704, 78705, 
+                                                         78708, 78709, 78710 , 78711, 78713, 78714, 78715, 78716, 78718, 78719, 78720, 78721, 78722, 78723, 
+                                                         78724, 78725, 78726, 78727, 78728, 78730, 78731, 78732,78733, 78734, 78735, 78736, 78738, 78739, 78741,
+                                                         78742, 78744, 78745, 78746, 78747, 78748, 78749, 78750, 78751, 78752, 78753, 78754, 78755, 78756, 78757, 78758
+                                                         ,78759, 78760, 78761, 78762, 78763, 78764, 78765, 78766, 78767, 78768, 78769)) #78712 is excluded,represents UT 
 education_2016 <- mutate(education_2016, less_than_highschool = rowSums(education_2016[,3:17]),
                          high_school_GED = estimate_total_regular_high_school_diploma + estimate_total_ged_or_alternative_credential
                          ,associates_some_college = estimate_total_some_college_1_or_more_years_no_degree +
@@ -111,10 +115,11 @@ education_2017 <- clean_names(education_2017)
 education_2017 <- rename(education_2017, zipcode = id2)
 education_2017 <- education_2017 %>% mutate_each(funs(as.character))
 education_2017 <- education_2017 %>% mutate_each(funs(as.numeric))
-education_2017 <- filter(education_2017, zipcode %in% c( 78641,78641, 78645, 78645, 78645, 78645 ,  
-                                                         78651,78652,78653, 78660, 78669, 78669, 78691,78701, 78702,78703, 78704, 78705, 78708, 78709 ,78710, 78711
-                                                         ,78713,78714,78715,78716,78718,78719,78720,78721,78722,78723,78724,78725,78726,78727,78728,78730,78731,
-                                                         78732, 78733,78733, 78733, 78734,78734,78734,78734,78735, 78735,78736, 78617)) #78712 is excluded,represents UT 
+education_2017 <- filter(education_2017, zipcode %in% c( 78617,78641, 78645,78651 , 78652, 78653, 78660, 78669, 78691, 78701, 78702, 78703, 78704, 78705, 
+                                                         78708, 78709, 78710 , 78711, 78713, 78714, 78715, 78716, 78718, 78719, 78720, 78721, 78722, 78723, 
+                                                         78724, 78725, 78726, 78727, 78728, 78730, 78731, 78732,78733, 78734, 78735, 78736, 78738, 78739, 78741,
+                                                         78742, 78744, 78745, 78746, 78747, 78748, 78749, 78750, 78751, 78752, 78753, 78754, 78755, 78756, 78757, 78758
+                                                         ,78759, 78760, 78761, 78762, 78763, 78764, 78765, 78766, 78767, 78768, 78769)) #78712 is excluded,represents UT 
 education_2017 <- mutate(education_2017, less_than_highschool = rowSums(education_2017[,3:17]),
                          high_school_GED = estimate_total_regular_high_school_diploma + estimate_total_ged_or_alternative_credential
                          ,associates_some_college = estimate_total_some_college_1_or_more_years_no_degree +
