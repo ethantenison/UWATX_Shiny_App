@@ -96,7 +96,7 @@ insurance_2016 <- insurance_2016[,-2]
 names(insurance_2016) <- c("zipcode", "percent_with_insurance", "percent_with_private_insurance", 
                            "percent_with_public_insurance", "percent_with_no_insurance")
 insurance_2016 <- mutate(insurance_2016, year = 2016) 
-insurance <- bind_rows(insurance_2013, insurance_2014, insurance_2015, insurance_2017, insurance_2017) 
+
 
 #2017
 
