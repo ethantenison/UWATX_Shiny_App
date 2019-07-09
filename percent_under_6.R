@@ -4,7 +4,7 @@ library(tidyverse)
 library(dplyr)
 library(janitor)
 #2013pulling the csv file into the global environment
-under6_2013<- read.csv("./ACS_Data/ACS_13_5YR_S0901_with_ann.csv") #
+under6_2013<- read.csv("./ACS_Data/ACS_13_5YR_B05009_with_ann.csv") 
 
 
 #2013renaming column headers and filtering for Travis country zipcodes
@@ -21,15 +21,11 @@ under6_2013 <- filter(under6_2013, zipcode %in% c( 78617,78641, 78645, 78652, 78
                                                    78754, 78756, 78757, 78758,78759)) #78712 is excluded,represents UT 
 
 #2013selecting meaningful columns
-under6_2013 <- select(under6_2013, zipcode, estimate_total, estimate_income_in_the_past_12_months_below_poverty_level,
-                      estimate_income_in_the_past_12_months_below_poverty_level_under_6_years)
+under6_2013 <- select(under6_2013, zipcode, estimate_total, estimate_total_under_6_years)
                       
-under6_2013 <- under6_2013[,-2]
-names(under6_2013) <- c("zipcode", "percent_with_under6", "percent_with_private_under6", 
-                        "percent_with_public_under6", "percent_with_no_under6")
 
-#2013Adding a column for year 
-under6_2013 <- mutate(under6_2013, year = 2013)  
+#2013Adding a column for percent and year 
+under6_2013 <- mutate(under6_2013, percent_under6 = estimate_total_under_6_years / estimate_total, year = 2013)  
 
 
 
