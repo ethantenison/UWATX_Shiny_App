@@ -5,6 +5,7 @@ library(janitor)
 #2013pulling the csv file into the global environment
 median_income_family_2013<- read.csv("./ACS_Data/ACS_13_5YR_B19126_with_ann.csv")
 
+#you may have to come back and fix the year 2015 
 
 #2013renaming column headers and filtering for Travis country zipcodes
 names(median_income_family_2013) <- as.matrix(median_income_family_2013[1, ])
