@@ -84,3 +84,5 @@ housing_units_2017 <- mutate(housing_units_2017, year = 2017)
 #Binding the rows to create one dataset  
 housing_units <- bind_rows(housing_units_2013, housing_units_2014, housing_units_2015, housing_units_2016, housing_units_2017)
 
+#save R object file 
+saveRDS(housing_units, file = "./total_housing_units.RDS")

@@ -83,3 +83,6 @@ library(dplyr)
         
 #Binding the rows to create one dataset for poverty status 
         poverty_status <- bind_rows(poverty_status_2013, poverty_status_2014,poverty_status_2015, poverty_status_2016, poverty_status_2017)
+        
+#Save R object
+        saveRDs(poverty_status, file = "./percent_below_poverty.RDS")

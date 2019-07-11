@@ -123,3 +123,6 @@ insurance_2017 <- mutate(insurance_2017, year = 2017)
 
 #binding rows
 insurance <- bind_rows(insurance_2013, insurance_2014, insurance_2015, insurance_2016, insurance_2017)
+
+#save r Object
+saveRDS(insurance, file = "./health_insurance.RDS")

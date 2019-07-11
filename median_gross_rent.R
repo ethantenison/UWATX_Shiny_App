@@ -114,3 +114,5 @@ medianRent_2017 <- mutate(medianRent_2017, year = 2017)
 #binding rows
 medianRent <- bind_rows(medianRent_2013, medianRent_2014, medianRent_2015, medianRent_2016, medianRent_2017)
 
+#save R object 
+saveRDS(medianRent, file = "./median_rent.RDS")

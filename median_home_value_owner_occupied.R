@@ -84,3 +84,5 @@ housing_median_price_2017 <- mutate(housing_median_price_2017, year = 2017)
 #Binding the rows to create one dataset  
 housing_median_price <- bind_rows(housing_median_price_2013, housing_median_price_2014, housing_median_price_2015, housing_median_price_2016, housing_median_price_2017)
 
+#save r object
+saveRDS(housing_median_price, file = "./median_housing_price.RDS")
