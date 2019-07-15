@@ -161,6 +161,10 @@ demography_2017 <- mutate(demography_2017, year = 2017)
 
 #binding rows
 demography <- bind_rows(demography_2013, demography_2014, demography_2015, demography_2016, demography_2017)
+demography$percent_hispanic <- paste0(demography$percent_hispanic, '%')
+demography$percent_white_alone <- paste0(demography$percent_white_alone, '%')
+demography$percent_black_alone <- paste0(demography$percent_black_alone, '%')
+demography$percent_asian_alone <- paste0(demography$percent_asian_alone, '%')
 
 #saving data 
 saveRDS(demography, file = "./demographics.RDS")

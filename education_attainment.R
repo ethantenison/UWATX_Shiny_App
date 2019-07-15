@@ -138,5 +138,11 @@ education <- transmute(education, zipcode, estimate_total, percent_less_than_hig
                        associates_some_college/estimate_total, percent_bachelors_plus = bachelors_plus/estimate_total, 
                        year)
 
+education$percent_less_than_highschool <- percent(education$percent_less_than_highschool)
+education$percent_highschool_GED <- percent(education$percent_highschool_GED)
+education$percent_associates_somecollege <- percent(education$percent_associates_somecollege)
+education$percent_bachelors_plus <- percent(education$percent_bachelors_plus)
+education <- select(education, -(estimate_total))
+
 #save R object 
 saveRDS(education, file = "./education_attainment.RDS")

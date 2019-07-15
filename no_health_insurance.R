@@ -123,6 +123,10 @@ insurance_2017 <- mutate(insurance_2017, year = 2017)
 
 #binding rows
 insurance <- bind_rows(insurance_2013, insurance_2014, insurance_2015, insurance_2016, insurance_2017)
+insurance$percent_with_insurance <- paste0(insurance$percent_with_insurance, '%')
+insurance$percent_with_private_insurance <- paste0(insurance$percent_with_private_insurance, '%')
+insurance$percent_with_public_insurance <- paste0(insurance$percent_with_public_insurance, '%')
+insurance$percent_with_no_insurance <- paste0(insurance$percent_with_no_insurance, '%')
 
 #save r Object
 saveRDS(insurance, file = "./health_insurance.RDS")
