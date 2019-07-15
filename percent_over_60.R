@@ -85,6 +85,7 @@
         
 #Binding the rows to create one dataset for over 60 years old  
         over60 <- bind_rows(over60_2013, over60_2014, over60_2015, over60_2016, over60_2017)
+        over60$percent_over60 <- paste0(over60$percent_over60, '%')
         
 #Save R object 
 saveRDS(over60, file = "./over60.RDS")
