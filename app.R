@@ -8,6 +8,7 @@ library(dplyr)
 library(shiny)
 library(leaflet)
 library(leaflet.extras)
+library(readr)
 
 # ------------------------------- #
 # ------------------------------- #
@@ -17,7 +18,7 @@ library(leaflet.extras)
 # ------------------------------- #
 # ------------------------------- #
 # ------------------------------- #
-
+df <- read_rds("./R Objects/combined_data_wide.RDS")
 
 
 
@@ -30,8 +31,10 @@ library(leaflet.extras)
 # ------------------------------- #
 # ------------------------------- #
 ui <- fluidPage(
-  print("Hello World!")
-  leafletOutput("mymap",height = 1000)
+  print("Hello World!"),
+  
+  #Sets the output of the ui 
+  leafletOutput("mymap", height = 1000)
 )
 
 
@@ -44,9 +47,24 @@ ui <- fluidPage(
 # ------------------------------- #
 # ------------------------------- #
 server <- function(input,output, session){
+  
+  #pull in the data and set it to be reactive 
+  data <- reactive({
+    x <- df
+  })
+  
+  #takes the output of the ui and uses as an input in the server 
+  output$mymap <- renderLeaflet({
+    df <- data()
+    
+    m <- leaflet(data = df) %>%
+      addTiles() %>%
+      setView(lng=-97.7430608, lat= 30.267153 , zoom=10)
+    m
+  })
 }
-  
-  
+
+
 # ------------------------------- #
 # ------------------------------- #
 # ------------------------------- #
@@ -55,6 +73,5 @@ server <- function(input,output, session){
 # ------------------------------- #
 # ------------------------------- #
 # ------------------------------- #
-  
+
 shinyApp(ui = ui, server = server)
-  
