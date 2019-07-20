@@ -30,11 +30,9 @@ library(leaflet.extras)
 # ------------------------------- #
 # ------------------------------- #
 ui <- fluidPage(
-  
-  # title ----
-  titlePanel("211 Community Explorer"),
-  )
-
+  print("Hello World!")
+  leafletOutput("mymap",height = 1000)
+)
 
 
 # ------------------------------- #
@@ -45,7 +43,8 @@ ui <- fluidPage(
 # ------------------------------- #
 # ------------------------------- #
 # ------------------------------- #
-server <-
+server <- function(input,output, session){
+}
   
   
 # ------------------------------- #
