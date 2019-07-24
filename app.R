@@ -10,6 +10,8 @@ library(leaflet)
 library(leaflet.extras)
 library(readr)
 library(sf)
+library(rgdal)
+library(acs)
 
 # ------------------------------- #
 # ------------------------------- #
@@ -19,9 +21,19 @@ library(sf)
 # ------------------------------- #
 # ------------------------------- #
 # ------------------------------- #
-df <- read_rds("./R Objects/combined_data_wide.RDS")
+
+#df <- read_rds("./R Objects/combined_data_wide.RDS")
+#df2016 <- filter(df, year == 2016)
+
+library(tigris)
+library(stringr)
+
+combined_data_wide <- read_rds("./R Objects/combined_data_wide.RDS")
 
 
+options(tigris_use_cache = TRUE)
+zipcodes_polygon <- zctas(cb = TRUE, state = "TX")
+data_polygon <- geo_join(zipcodes_polygon, combined_data_wide, "GEOID10", "zipcode", how = "inner")
 
 # ------------------------------- #
 # ------------------------------- #
