@@ -32,13 +32,9 @@ df <- read_rds("./R Objects/combined_data_wide.RDS")
 # ------------------------------- #
 # ------------------------------- #
 ui <- fluidPage(
-  print("Hello World!"),
-  
-  #Sets the output of the ui 
-  leafletOutput("mymap", height = 1000)
+  sliderInput(inputId = "MedianIncome", "Median Income", 0, 180000, value = 50000),
+  leafletOutput(outputId = "mymap")
 )
-
-
 # ------------------------------- #
 # ------------------------------- #
 # ------------------------------- #
@@ -47,22 +43,9 @@ ui <- fluidPage(
 # ------------------------------- #
 # ------------------------------- #
 # ------------------------------- #
-server <- function(input,output, session){
-  
-  #pull in the data and set it to be reactive 
-  data <- reactive({
-    x <- df
-  })
-  
-  #takes the output of the ui and uses as an input in the server 
-  output$mymap <- renderLeaflet({
-    df <- data()
-    
-    m <- leaflet(data = df) %>%
-      addTiles() %>%
-      setView(lng=-97.7430608, lat= 30.267153 , zoom=10)
-    m
-  })
+server <- function(input,output){
+  output$mymap <- renderLeaflet({ 
+    leaflet(data_polygon) %>% addProviderTiles(providers$OpenStreetMap.BlackAndWhite) %>% addPolygons(data = data_polygon[data_polygon@data$median_family_income < input$MedianIncome, ])})
 }
 
 
