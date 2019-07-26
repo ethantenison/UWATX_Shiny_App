@@ -67,3 +67,9 @@ calls2017 <- mutate(calls2017, date = date2017)
 calls2017 <- left_join(calls2017, total_housing_units, by = c("zip_code" = "zipcode", "date"))
 calls2017 <- mutate(calls2017, calls_per100HH = total_calls / (housing_units/100) )
 calls2017$calls_per100HH<- format(calls2017$calls_per100HH, digits=2, nsmall=2)
+
+#Binding the rows to create one dataset for total calls and calls per 100 households 
+total_211_calls <- bind_rows(calls2016, calls2017)
+
+#Save R object
+saveRDS(total_211_calls, file = "./R Objects/total_211_calls.RDS")
