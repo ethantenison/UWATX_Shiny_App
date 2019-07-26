@@ -48,5 +48,3 @@ data_polygon <- geo_join(zipcodes_polygon, combined_data_wide, "GEOID10", "zipco
 
 
 #Save the data  
-#saveRDS(combined_data_wide, file = "./R Objects/combined_data_wide.RDS")
-writeOGR(data_polygon, file = "./R Objects/data_polygon", driver="ESRI Shapefile")
