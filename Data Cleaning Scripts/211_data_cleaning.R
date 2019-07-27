@@ -70,6 +70,8 @@ calls2017$calls_per100HH<- format(calls2017$calls_per100HH, digits=2, nsmall=2)
 
 #Binding the rows to create one dataset for total calls and calls per 100 households 
 total_211_calls <- bind_rows(calls2016, calls2017)
+total_211_calls <- rename(total_211_calls, zipcode = zip_code)
+total_211_calls <- select(total_211_calls, -(housing_units))
 
-#Save R object
+#Save R object 
 saveRDS(total_211_calls, file = "./R Objects/total_211_calls.RDS")
