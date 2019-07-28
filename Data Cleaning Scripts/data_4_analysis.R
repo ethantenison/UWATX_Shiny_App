@@ -49,5 +49,20 @@ data_4_analysis <- mutate(data_4_analysis, category = recode(data_4_analysis$mea
                                           )
                           )
 
-          
+  #Adding Geograpic Values
+library(sf)
+zip <- read_sf(dsn = ".", layer = "tl_2015_us_zcta510")
+zip <- filter(zip, GEOID10 %in% c( 78617,78641,78645,78652,78653,78660,78701,78702
+                                                         ,78703,78704,78719,78721,78722,78723,78724,78725
+                                                         ,78727,78728,78730,78731,78732,78733,78734,78735
+                                                         ,78736,78738,78739,78741,78742,78743,78744,78745
+                                                         ,78746,78747,78748,78749,78750,78751,78752,78753
+                                                         ,78754,78756,78757,78758,78759,78654,78610,78621
+                                                         ,78615,78669,78737,78620,78726)) #78712 is excluded,represents UT 
+
+zip <- zip %>% select(GEOID10, geometry) %>% rename(zipcode = GEOID10)
+
+data_4_analysis$zipcode <- as.character(data_4_analysis$zipcode)
+
+data_4_analysis <- left_join(data_4_analysis, zip, by = "zipcode")
 
