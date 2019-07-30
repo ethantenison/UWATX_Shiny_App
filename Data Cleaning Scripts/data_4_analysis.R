@@ -66,3 +66,5 @@ data_4_analysis$zipcode <- as.character(data_4_analysis$zipcode)
 
 data_4_analysis <- left_join(data_4_analysis, zip, by = "zipcode")
 
+#Save R object 
+saveRDS(data_4_analysis, file = "./R Objects/data_4_analysis.RDS")
