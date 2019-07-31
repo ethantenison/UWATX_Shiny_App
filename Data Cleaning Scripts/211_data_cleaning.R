@@ -6,8 +6,7 @@ library(readr)
 library(openxlsx)
 library(lubridate)
 
-#2016 pulling the csv file into the global environment. NOTE the original file was an excel file, but I saved as and converted it into
-#a csv file, which is much easier to work with. 
+
 
 icarol_2016 <- openxlsx::read.xlsx("./211 Data/2016 CNT iCarol Export.xlsx", sheet = 1, startRow = 1, colNames = TRUE)
 
