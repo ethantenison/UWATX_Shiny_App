@@ -60,5 +60,6 @@ needs_zip_treemap17 <- mutate(needs_zip_treemap17, year = 2017)
 #create one object and saving
 needs_zip_treemap <- bind_rows(needs_zip_treemap16, needs_zip_treemap17)
 needs_zip_treemap <- na.omit(needs_zip_treemap)
+needs_zip_treemap <- filter(needs_zip_treemap, value >5)
 saveRDS(needs_zip_treemap, file = "./R Objects/needs_zip_treemap.RDS")
 
