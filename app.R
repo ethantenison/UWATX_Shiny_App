@@ -46,12 +46,12 @@ full_zips_list <- "78617|78641|78645|78652|78653|78660|78701|78702|78703|78704|7
 
 filter_out <- "78712|78743"
 
-treemap_master <- read_rds("data/treemap_master.rds") %>%
+treemap_master <- read_rds("R Objects/treemap_master.rds") %>%
   ungroup() %>%
   mutate(age = as.character(age))
 
 #TREEMAP DATA - ZIP & NEEDS
-needs_zip_treemap <- read_rds("data/needs_zip_treemap.rds") %>%
+needs_zip_treemap <- read_rds("R Objects/needs_zip_treemap.rds") %>%
   ungroup() %>% 
   janitor::clean_names() %>%
   mutate(day = as.character("01"),
@@ -60,19 +60,17 @@ needs_zip_treemap <- read_rds("data/needs_zip_treemap.rds") %>%
   mutate(date = as.Date(date, "%Y-%m-%d")) %>% 
   rename(Year = date)
 
-travis_dl <- read_rds("data/travis_dl.rds")
+travis_dl <- read_rds("R Objects/data_4_download.rds")
 
-travis <- read_rds("data/travis_tidy.rds") %>%
+travis <- read_rds("R objects/data_4_analysis.rds") %>%
   filter(!str_detect(zipcode, filter_out))  %>% 
   group_by(Year, measure) %>% 
   mutate(rank = dense_rank(desc(value))) %>% 
   ungroup()
 
-travis_wide <- read_rds("data/travis_wide.rds")
+travis_summ <- read_rds("R Objects/summ211data.rds")
 
-travis_summ <- read_rds("data/summ211data.rds")
-
-travis_county_sf <- read_rds("data/traviscounty.rds")
+travis_county_sf <- read_rds("data/traviscounty_boundary.rds")
 
 # ------------------------------- #
 # ------------------------------- #
@@ -118,9 +116,9 @@ sidebar <- dashboardSidebar(
       div(id = "BoxYear1",
           sliderInput("year", 
                       "Select a Year:",
-                      min = as.Date("2013-01-01"),
-                      max = as.Date("2016-01-01"),
-                      value= as.Date("2013-01-01"),
+                      min = as.Date("2016-01-01"),
+                      max = as.Date("2017-01-01"),
+                      value= as.Date("2016-01-01"),
                       timeFormat= "%Y",
                       step = 365,
                       animate = animationOptions(interval = 1000))),
@@ -129,25 +127,38 @@ sidebar <- dashboardSidebar(
             inputId = "indicator",
             label = "Select an Indicator",
             choices = list(
-              "211 Call Data" = c("Total 211 Calls" = "Calls_Tot",
-                                  "211 Calls Per 100hh" = "Calls_Per100hh"),
-              "Household Data" = c("Total Households" = "Households",
-                                   "Median Household Value" = "Med_HouseVal"),
-              "Gender" = c("Female Population" = "Pct_Female",
-                           "Male Population" = "Pct_Male"),
-              "Parent Status" = c("Two Parent Population" = "Pct_MarriedCouple",
-                                  "Single Parent Population" = "Pct_SingleParent"),
-              "Demographics" = c("Asian Population" = "Pct_Asian",
-                                 "Black Population" = "Pct_Black",
-                                 "Hispanic Population" = "Pct_Hispanic",
-                                 "White Population" = "Pct_White"),
-              "Poverty & Inequality" = c("Family Poverty Rate" = "Rate_FamPov",
-                                         "Incomes to Poverty Ratio: 100%" = "Rate_Poverty100",
-                                         "Incomes to Poverty Ratio: 200%" = "Rate_Poverty200"),
-              "Education & Health" = c("Education: Less Than HS" = "Rate_LessThanHS",
-                                       "Education: Dropout" = "Rate_Dropout",
-                                       "Coverage Rate: No Health Insurance" = "Rate_NoHealth")),
-            selected = "Calls_Per100hh")),
+              "211 Call Data" = c("Total 211 Calls" = "total_calls",
+                                  "211 Calls Per 100hh" = "calls_per100hh"),
+              
+              "Household Data" = c("Total Households" = "housing_units",
+                                   "Median Household Value" = "housing_median_price",
+                                   "Median Rent" = "estimate_median_gross_rent"),
+        
+              "Demographics" = c("Asian Population" = "percent_asian_alone",
+                                 "Black Population" = "percent_black_alone",
+                                 "Hispanic Population" = "percent_hispanic",
+                                 "White Population" = "percent_white_alone"),
+              
+              "Poverty & Inequality" = c("Median Family Income" = "median_family_income",
+                                         "Incomes to Poverty Ratio: 100%" = "percent_below_poverty_level"),
+              
+              "Education" = c("Education: Less Than HS" = "percent_less_than_highschool",
+                              "Education: High School Diploma or GED" = "percent_highschool_GED",
+                              "Education: Associate's Degree or Some College" = "percent_associates_somecollege",
+                              "Education: Bachelor's Degree or Higher" = "percent_bachelors_plus"),
+              
+              "Health Insurance" = c("Coverage Rate: No Insurance" = "percent_with_no_insurance",
+                                      "Coverage Rate: Insurance" = "percent_with_insurance",
+                                      "Coverage Rate: Private Insurance" = "percent_with_private_insurance",
+                                      "Coverage Rate: Public Insurance" = "percent_with_public_insurance"),
+              
+              "Children & the Elderly" = c("Total Children Under 6 Years of Age" = "children_under6",
+                                           "Children Under 6 Years Old" = "percent_under6",
+                                           "Elderly Over 60 years Old" = "percent_over60"),
+              ),
+    
+            selected = "calls_per100hh")),
+      
       div(id = "BoxDownload",
           downloadButton('downloadCSV', label = 'Download', style="display: block; margin: 0 auto; width: 200px;color: #152934;")),
       actionButton("help", "Tutorial", icon = icon("book-open", class = "fa-pull-left"), style="color: #152934")
