@@ -2,7 +2,7 @@
 # This is a Shiny web application. You can run the application by clicking
 # the 'Run App' button above.
 #
-# Find out more about building applications with Shiny here8:
+# Find out more about building applications with Shiny here:
 #
 #    http://shiny.rstudio.com/
 #
@@ -65,12 +65,13 @@ travis_dl <- read_rds("R Objects/data_4_download.rds")
 travis <- read_rds("R objects/data_4_analysis.rds") %>%
   filter(!str_detect(zipcode, filter_out))  %>% 
   group_by(year, measure) %>% 
-  mutate(rank = dense_rank(desc(statistic))) %>% 
+  mutate(rank = dense_rank(desc(value))) %>% 
   ungroup()
 
 travis_summ <- read_rds("R Objects/summ211.rds")
 
 travis_county_sf <- read_rds("R Objects/traviscounty_boundary.rds")
+
 
 # ------------------------------- #
 # ------------------------------- #
@@ -126,39 +127,36 @@ sidebar <- dashboardSidebar(
           selectInput(
             inputId = "indicator",
             label = "Select an Indicator",
-            choices = list(
-              "211 Call Data" = c("Total 211 Calls" = "total_calls",
-                                  "211 Calls Per 100hh" = "calls_per100HH"),
-              
-              "Household Data" = c("Total Households" = "housing_units",
-                                   "Median Household Value" = "housing_median_price",
-                                   "Median Rent" = "estimate_median_gross_rent"),
-        
-              "Demographics" = c("Asian Population" = "percent_asian_alone",
-                                 "Black Population" = "percent_black_alone",
-                                 "Hispanic Population" = "percent_hispanic",
-                                 "White Population" = "percent_white_alone"),
-              
-              "Poverty & Inequality" = c("Median Family Income" = "median_family_income",
-                                         "Incomes to Poverty Ratio: 100%" = "percent_below_poverty_level"),
-              
-              "Education" = c("Education: Less Than HS" = "percent_less_than_highschool",
-                              "Education: High School Diploma or GED" = "percent_highschool_GED",
-                              "Education: Associate's Degree or Some College" = "percent_associates_somecollege",
-                              "Education: Bachelor's Degree or Higher" = "percent_bachelors_plus"),
-              
-              "Health Insurance" = c("Coverage Rate: No Insurance" = "percent_with_no_insurance",
-                                      "Coverage Rate: Insurance" = "percent_with_insurance",
-                                      "Coverage Rate: Private Insurance" = "percent_with_private_insurance",
-                                      "Coverage Rate: Public Insurance" = "percent_with_public_insurance"),
-              
-              "Children & the Elderly" = c("Total Children Under 6 Years of Age" = "children_under6",
-                                           "Children Under 6 Years Old" = "percent_under6",
-                                           "Elderly Over 60 years Old" = "percent_over60"),
-              ),
-    
-            selected = "calls_per100HH")),
-      
+            choices = list(              "211 Call Data" = c("Total 211 Calls" = "total_calls",
+                                                             "211 Calls Per 100hh" = "calls_per100HH"),
+                                         
+                                         "Household Data" = c("Total Households" = "housing_units",
+                                                              "Median Household Value" = "housing_median_price",
+                                                              "Median Rent" = "estimate_median_gross_rent"),
+                                         
+                                         "Demographics" = c("Asian Population" = "percent_asian_alone",
+                                                            "Black Population" = "percent_black_alone",
+                                                            "Hispanic Population" = "percent_hispanic",
+                                                            "White Population" = "percent_white_alone"),
+                                         
+                                         "Poverty & Inequality" = c("Median Family Income" = "median_family_income",
+                                                                    "Incomes to Poverty Ratio: 100%" = "percent_below_poverty_level"),
+                                         
+                                         "Education" = c("Education: Less Than HS" = "percent_less_than_highschool",
+                                                         "Education: High School Diploma or GED" = "percent_highschool_GED",
+                                                         "Education: Associate's Degree or Some College" = "percent_associates_somecollege",
+                                                         "Education: Bachelor's Degree or Higher" = "percent_bachelors_plus"),
+                                         
+                                         "Health Insurance" = c("Coverage Rate: No Insurance" = "percent_with_no_insurance",
+                                                                "Coverage Rate: Insurance" = "percent_with_insurance",
+                                                                "Coverage Rate: Private Insurance" = "percent_with_private_insurance",
+                                                                "Coverage Rate: Public Insurance" = "percent_with_public_insurance"),
+                                         
+                                         "Children & the Elderly" = c("Total Children Under 6 Years of Age" = "children_under6",
+                                                                      "Children Under 6 Years Old" = "percent_under6",
+                                                                      "Elderly Over 60 years Old" = "percent_over60"
+                                         )),
+            selected = "Calls_per100HH")),
       div(id = "BoxDownload",
           downloadButton('downloadCSV', label = 'Download', style="display: block; margin: 0 auto; width: 200px;color: #152934;")),
       actionButton("help", "Tutorial", icon = icon("book-open", class = "fa-pull-left"), style="color: #152934")
@@ -182,6 +180,8 @@ sidebar <- dashboardSidebar(
                       choices = c("Age" = "age",
                                   "Gender" = "gender",
                                   "Language" = "preferred_language",
+                                  "Military Branch" = "military_branch",
+                                  "Military Status" = "military_status",
                                   "Zip Code" = "zipcode"),
                       selected = "zipcode")),
       div(id = "BoxTier2",
@@ -189,9 +189,14 @@ sidebar <- dashboardSidebar(
                       choices = c("Age" = "age",
                                   "Gender" = "gender",
                                   "Language" = "preferred_language",
+                                  "Military Branch" = "military_branch",
+                                  "Military Status" = "military_status",
                                   "Zip Code" = "zipcode"),
                       selected = "gender"))
-     
+      # div(id = "Box15",
+      # downloadButton('downloadCSV', label = 'Download Data', style="display: block; margin: 0 auto; width: 200px;color: #152934;"))
+      # actionButton("help", "Tutorial", icon = icon("book-open"), style="color: #152934;"),
+      # HTML("<button type='button' class='btn btn-default action-button shiny-bound-input' style='display: block; margin: 6px 5px 6px 15px; width: 200px;color: #152934;' onclick = 'shinyjs.toggleFullScreen();'><i class='fa fa-expand'></i> Fullscreen</button>")
     ),
     hr(style="margin-top: 5px; margin-bottom: 5px; width:90%"),
     menuItem("The Index", icon = icon("book"), tabName = "about"),
@@ -200,7 +205,7 @@ sidebar <- dashboardSidebar(
     actionButton("show", "Learn More", icon = icon("info-circle", class = "fa-pull-left"), style="color: #152934"),
     HTML("<button type='button' class='btn btn-default action-button shiny-bound-input' style='display: block; margin: 6px 5px 6px 15px; width: 200px;color: #152934;' onclick = 'shinyjs.toggleFullScreen();'><i class='fa fa-expand fa-pull-left'></i> Fullscreen</button>"),
     hr(style="margin-top: 15px; margin-bottom: 5px; width:90%")
-    
+    # HTML("<h4 style='color:#ffffff; margin-left:17px; margin-right:2px'>About The Dashboard</h4>")
   )
 )
 
@@ -237,16 +242,16 @@ body <- dashboardBody(
                                            h3(textOutput("zipboxprofile"), style = "text-align:left; margin-top:0; margin-bottom:15"),
                                            valueBoxOutput("households", width=12),
                                            valueBoxOutput("mhv", width=12),
-                                           valueBoxOutput("callstotal", width=12), ##these entries are close to the rmarkdown names 
+                                           valueBoxOutput("callstotal", width=12),
                                            valueBoxOutput("callsperhh", width=12)
                                     ),
                                     column(width = 6, style = "margin-top: 12px;",
                                            selectInput("category", "Select A Profile Category:",
-                                                       choices = c("Children & the Elderly" = "Age",
+                                                       choices = c("Gender" = "Gender",
                                                                    "Demographics" = "Race",
-                                                                   "Insurance" = "Insurance",
-                                                                   "Poverty & Inequality" = "Financial",
-                                                                   "Education" = "Education"),
+                                                                   "Parenting" = "Parenting",
+                                                                   "Poverty" = "PovIncome",
+                                                                   "Education & Health" = "EdHealth"),
                                                        selected = "Race"),
                                            # data.hint = "Use this to explore different population topics. For instance, the Demographics category tells us the breakdown of different demographic populations living in a given zip code."
                                            
@@ -510,8 +515,8 @@ server <- function (input, output, session) {
   data_for_dl <- reactive({
     
     dat <- travis_dl %>%
-      filter(year == input$year) %>% 
-      select(year, zipcode, input$indicator)
+      filter(Year == input$year) %>% 
+      select(Year, zipcode, input$indicator)
     
   })
   
@@ -526,35 +531,35 @@ server <- function (input, output, session) {
     
     ziptab_text <-
       travis %>%
-      filter(year == input$year,
+      filter(Year == input$year,
              measure == input$indicator,
              zipcode == "78744") %>% 
-      mutate(year = as.character(Year)) %>% 
-      mutate(year = gsub(pattern='-01-01', replacement='', x=year))
+      mutate(Year = as.character(Year)) %>% 
+      mutate(Year = gsub(pattern='-01-01', replacement='', x=Year))
     
-    paste0("Zip Code Tools For ", ziptab_text$year)
+    paste0("Zip Code Tools For ", ziptab_text$Year)
   })
   
   output$indicatortext <- renderText({
     travis_indicatortext <-
       travis %>%
-      filter(year == input$year,
+      filter(Year == input$year,
              measure == input$indicator,
              zipcode == "78744") %>% 
-      mutate(year = as.character(year)) %>% 
-      mutate(year = gsub(pattern='-01-01', replacement='', x=year))
-    paste0(travis_indicatortext$year, " Indicator Trends Map - ", travis_indicatortext$displayed_measure) 
+      mutate(Year = as.character(Year)) %>% 
+      mutate(Year = gsub(pattern='-01-01', replacement='', x=Year))
+    paste0(travis_indicatortext$Year, " Indicator Trends Map - ", travis_indicatortext$measures) 
   })
   
   output$treemapcallexplore <- renderHighchart({
     
     treemap_explore1 <- treemap_master %>%
-      filter(year == input$year1) %>%
-      select(year, input$tierone, input$tiertwo, need_name, count) %>% 
+      filter(Year == input$year1) %>%
+      select(Year, input$tierone, input$tiertwo, need_name, count) %>% 
       group_by(.[[1]],.[[2]],.[[3]],.[[4]]) %>%
-      summarize(statistic = sum(count)) %>%
+      summarize(value = sum(count)) %>%
       filter(`.[[2]]`!="Undetermined" & `.[[3]]`!="Undetermined") %>%
-      top_n(20, statistic) %>% 
+      top_n(20, value) %>% 
       ungroup()
     
     hcoptslang <- getOption("highcharter.lang")
@@ -563,8 +568,8 @@ server <- function (input, output, session) {
     
     hctreemap2(treemap_explore1,
                group_vars = c(".[[2]]",".[[3]]",".[[4]]"),
-               size_var = "statistic",
-               color_var = "statistic",
+               size_var = "value",
+               color_var = "value",
                animation = FALSE,
                opacity = .4,
                levels = list(
@@ -576,7 +581,7 @@ server <- function (input, output, session) {
       hc_colorAxis(minColor = brewer.pal(9, "Blues")[1],
                    maxColor = brewer.pal(9, "Blues")[9]) %>%
       hc_tooltip(pointFormat = "<b>{point.name}</b><br>
-                 Calls Made: {point.value:,.0f}<br>") %>% ##value might need to be changed here not sure
+                 Calls Made: {point.value:,.0f}<br>") %>%
       hc_add_theme(hc_theme(
         chart = list(style = list(fontFamily = "Roboto",
                                   fontSize = "16px")),
@@ -596,18 +601,18 @@ server <- function (input, output, session) {
     
     travis_leaf <-
       travis %>%
-      filter(year == input$year,
+      filter(Year == input$year,
              measure == input$indicator)
     
     travis_leaf_wide <- travis_leaf %>%
-      filter(year == input$year,
+      filter(Year == input$year,
              measure == input$indicator)
     
     year_text <- 
       travis_summ %>% 
-      filter(year == input$year)  %>% 
-      mutate(year = as.character(year)) %>% 
-      mutate(year = gsub(pattern='-01-01', replacement='', x=year))
+      filter(Year == input$year)  %>% 
+      mutate(Year = as.character(Year)) %>% 
+      mutate(Year = gsub(pattern='-01-01', replacement='', x=Year))
     
     click_zip <- eventReactive(input$map_shape_click, {
       
@@ -635,7 +640,7 @@ server <- function (input, output, session) {
       
       m <- travis[travis$zipcode == click_zip(), ] 
       m <- m %>% 
-        filter(year == input$year,
+        filter(Year == input$year,
                measure == input$indicator) %>% 
         as.data.frame()
       
@@ -670,7 +675,7 @@ server <- function (input, output, session) {
       travis_summarytext <- travis %>%
         filter()
       
-      paste0("In ", zipcode_data()$zipcode, zipcode_data()$displayed_measure, zipcode_data()$zipcode) 
+      paste0("In ", zipcode_data()$zipcode, zipcode_data()$measures, zipcode_data()$zipcode) 
     })
     
     
@@ -678,10 +683,10 @@ server <- function (input, output, session) {
       
       m <- travis[travis$zipcode == click_zip(), ] 
       m <- m %>% 
-        filter(year == input$year,
+        filter(Year == input$year,
                measure == input$indicator) %>% 
-        mutate(year = as.character(year)) %>% 
-        mutate(year = gsub(pattern='-01-01', replacement='', x=year)) %>%  
+        mutate(Year = as.character(Year)) %>% 
+        mutate(Year = gsub(pattern='-01-01', replacement='', x=Year)) %>%  
         as.data.frame()
       
       paste0("Is This Indicator 'Normal' in ", m$zipcode, "?")
@@ -691,10 +696,10 @@ server <- function (input, output, session) {
       
       m <- travis[travis$zipcode == click_zip(), ] 
       m <- m %>% 
-        filter(year == input$year,
+        filter(Year == input$year,
                measure == input$indicator) %>% 
-        mutate(year = as.character(year)) %>% 
-        mutate(year = gsub(pattern='-01-01', replacement='', x=year)) %>%  
+        mutate(Year = as.character(Year)) %>% 
+        mutate(Year = gsub(pattern='-01-01', replacement='', x=Year)) %>%  
         as.data.frame()
       
       paste0(m$zipcode, " Overview")
@@ -704,10 +709,10 @@ server <- function (input, output, session) {
       
       m <- travis[travis$zipcode == click_zip(), ] 
       m <- m %>% 
-        filter(year == input$year,
+        filter(Year == input$year,
                measure == input$indicator) %>% 
-        mutate(year = as.character(year)) %>% 
-        mutate(year = gsub(pattern='-01-01', replacement='', x=year)) %>%  
+        mutate(Year = as.character(Year)) %>% 
+        mutate(Year = gsub(pattern='-01-01', replacement='', x=Year)) %>%  
         as.data.frame()
       
       paste0("What does need look like in ", m$zipcode, "?")
@@ -716,15 +721,15 @@ server <- function (input, output, session) {
     output$callstotal <- renderValueBox({
       travis_calls <- travis[travis$zipcode == click_zip(), ] 
       travis_calls <- travis_calls %>% 
-        filter(year == input$year,
+        filter(Year == input$year,
                zipcode == travis_calls$zipcode,
                measure == "total_calls") %>% 
-        mutate_at(vars(statistic), scales::comma) %>% 
-        mutate(year = as.character(year)) %>% 
-        mutate(year = gsub(pattern='-01-01', replacement='', x=year))
+        mutate_at(vars(value), scales::comma) %>% 
+        mutate(Year = as.character(Year)) %>% 
+        mutate(Year = gsub(pattern='-01-01', replacement='', x=Year))
       
       valueBox(
-        paste0(travis_calls$statistic), paste0("Total Calls ",  "(Rank: ", travis_calls$rank,")"), icon = icon("phone"),
+        paste0(travis_calls$value), paste0("Total Calls ",  "(Rank: ", travis_calls$rank,")"), icon = icon("phone"),
         color = "yellow"
       )
     })
@@ -732,14 +737,14 @@ server <- function (input, output, session) {
     output$callsperhh <- renderValueBox({
       travis_callshh <- travis[travis$zipcode == click_zip(), ] 
       travis_callshh <- travis_callshh %>% 
-        filter(year == input$year,
+        filter(Year == input$year,
                zipcode == travis_callshh$zipcode,
                measure == "calls_per100HH") %>% 
-        mutate(year = as.character(year)) %>% 
-        mutate(year = gsub(pattern='-01-01', replacement='', x=year))
+        mutate(Year = as.character(Year)) %>% 
+        mutate(Year = gsub(pattern='-01-01', replacement='', x=Year))
       
       valueBox(
-        paste0(round(travis_callshh$statistic, 1)), paste0("Calls Per 100 HHs ", "(Rank: ", travis_callshh$rank,")"), icon = icon("phone-volume"),
+        paste0(round(travis_callshh$value, 1)), paste0("Calls Per 100 HHs ", "(Rank: ", travis_callshh$rank,")"), icon = icon("phone-volume"),
         color = "red"
       )
     })
@@ -747,15 +752,15 @@ server <- function (input, output, session) {
     output$mhv <- renderValueBox({
       travis_mhv <- travis[travis$zipcode == click_zip(), ] 
       travis_mhv <- travis_mhv %>% 
-        filter(year == input$year,
+        filter(Year == input$year,
                zipcode == travis_mhv$zipcode,
                measure == "housing_median_price") %>% 
-        mutate_at(vars(statistic), scales::dollar) %>% 
-        mutate(year = as.character(year)) %>% 
-        mutate(year = gsub(pattern='-01-01', replacement='', x=year))
+        mutate_at(vars(value), scales::dollar) %>% 
+        mutate(Year = as.character(Year)) %>% 
+        mutate(Year = gsub(pattern='-01-01', replacement='', x=Year))
       
       valueBox(
-        paste0(travis_mhv$statistic), paste0("Median Household Value ", "(Rank: ", travis_mhv$rank,")"), icon = icon("money-bill-wave"),
+        paste0(travis_mhv$value), paste0("Median Household Value ", "(Rank: ", travis_mhv$rank,")"), icon = icon("money-bill-wave"),
         color = "blue"
       )
     })
@@ -764,15 +769,15 @@ server <- function (input, output, session) {
       
       travis_hh <- travis[travis$zipcode == click_zip(), ] 
       travis_hh <- travis_hh %>% 
-        filter(year == input$year,
+        filter(Year == input$year,
                zipcode == travis_hh$zipcode,
                measure == "housing_units") %>% 
-        mutate_at(vars(statistic), scales::comma) %>% 
-        mutate(year = as.character(year)) %>% 
-        mutate(year = gsub(pattern='-01-01', replacement='', x=year))
+        mutate_at(vars(value), scales::comma) %>% 
+        mutate(Year = as.character(Year)) %>% 
+        mutate(Year = gsub(pattern='-01-01', replacement='', x=Year))
       
       valueBox(
-        paste0(travis_hh$statistic), paste0("Total Households ", "(Rank: ", travis_hh$rank,")"), icon = icon("home"),
+        paste0(travis_hh$value), paste0("Total Households ", "(Rank: ", travis_hh$rank,")"), icon = icon("home"),
         color = "light-blue"
       )
     })
@@ -781,18 +786,18 @@ server <- function (input, output, session) {
       
       travis_profile1 <- travis[travis$zipcode == click_zip(), ] 
       travis_profile <- travis_profile1 %>% 
-        filter(year == input$year,
+        filter(Year == input$year,
                zipcode == travis_profile1$zipcode,
                category == input$category)
       
       travis_yaxis <- travis_profile1 %>%
         filter(zipcode == travis_profile1$zipcode,
                category == input$category) %>% 
-        mutate(min = min(statistic),
-               max = max(statistic))
+        mutate(min = min(value),
+               max = max(value))
       
-      hchart(travis_profile, "column", hcaes(x = displayed_measure, y = statistic), animation = FALSE) %>% 
-        hc_yAxis(labels = list(format = "{statistic}%"), 
+      hchart(travis_profile, "column", hcaes(x = measures, y = value), animation = FALSE) %>% 
+        hc_yAxis(labels = list(format = "{value}%"), 
                  title = FALSE, 
                  min = round(mean(travis_yaxis$min), 1), 
                  max = round(mean(travis_yaxis$max), 1)) %>% 
@@ -820,12 +825,12 @@ server <- function (input, output, session) {
     output$treemap <- renderHighchart({
       
       needs_zip_treemap_int <- needs_zip_treemap[needs_zip_treemap$zipcode == click_zip(), ] %>% 
-        filter(year == input$year)
+        filter(Year == input$year)
       
       hctreemap2(needs_zip_treemap_int,
-                 group_vars = c("needs_category"), ##what is this? 
-                 size_var = "statistic",
-                 color_var = "statistic",
+                 group_vars = c("needs_category"),
+                 size_var = "value",
+                 color_var = "value",
                  animation = FALSE,
                  opacity = .35,
                  levels = list(
@@ -860,23 +865,23 @@ server <- function (input, output, session) {
       
       m <- travis[travis$zipcode == click_zip(), ] 
       m <- m %>% 
-        filter(year == input$year,
+        filter(Year == input$year,
                measure == input$indicator,
                zipcode == m$zipcode)
       
       travis_chart <-
         travis %>%
         mutate(measure = factor(measure),
-               statistic = round(statistic, 2)) %>% 
-        filter(year == input$year,
+               value = round(value, 2)) %>% 
+        filter(Year == input$year,
                measure == input$indicator) %>% 
-        mutate(min = min(statistic),
-               max = max(statistic))
+        mutate(min = min(value),
+               max = max(value))
       
-      hcboxplot(x = travis_chart$statistic, 
-                var = travis_chart$displayed_measure, animation = FALSE) %>%
-        hc_add_series_scatter(x = 0, y =  round(m$statistic, 2), name = m$zipcode, color = "#5da5da", animation = FALSE) %>%
-        hc_yAxis(labels = list(format = "{statistic}%")) %>%
+      hcboxplot(x = travis_chart$value, 
+                var = travis_chart$measures, animation = FALSE) %>%
+        hc_add_series_scatter(x = 0, y =  round(m$value, 2), name = m$zipcode, color = "#5da5da", animation = FALSE) %>%
+        hc_yAxis(labels = list(format = "{value}%")) %>%
         hc_add_theme(
           hc_theme_merge(
             hc_theme_tufte(),
@@ -888,10 +893,10 @@ server <- function (input, output, session) {
     
     pal <- colorNumeric(
       palette = "PuBu", n = 10,
-      domain = travis_leaf$statistic)
+      domain = travis_leaf$value)
     
     legend_title <- travis %>% 
-      filter(year == input$year,
+      filter(Year == input$year,
              measure == input$indicator,
              zipcode == "78744")
     
@@ -907,7 +912,7 @@ server <- function (input, output, session) {
       addPolygons(data = travis_leaf,
                   stroke = FALSE, 
                   smoothFactor = 0, 
-                  fillColor = ~pal(statistic),
+                  fillColor = ~pal(value),
                   # popup = popupmaker,
                   fillOpacity = 0.8, 
                   layerId = ~zipcode) %>%
@@ -916,11 +921,11 @@ server <- function (input, output, session) {
       addResetMapButton() %>% 
       addLegend("bottomleft",
                 pal = pal,
-                values = ~statistics,
+                values = ~value,
                 labFormat = labelFormat(
                   prefix = " ", suffix = "", between = ", "
                 ),
-                title = paste0(legend_title$displayed_measure),
+                title = paste0(legend_title$measures),
                 opacity = 1)
     
     map
