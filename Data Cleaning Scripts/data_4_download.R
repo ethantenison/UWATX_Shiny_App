@@ -30,5 +30,6 @@ data_4_download <- data_4_download %>% full_join(health_insurance, by = c("zipco
         full_join(total_211_calls, by = c("zipcode" , "date")) 
 
 data_4_download <- select(data_4_download, date, zipcode, total_calls, calls_per100HH, everything())
+data_4_download <- rename(data_4_download, Year = date)
 
 saveRDS(data_4_download, file = "./R Objects/data_4_download.RDS")

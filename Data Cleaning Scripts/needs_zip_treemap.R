@@ -32,7 +32,7 @@ needs_zip_treemap16 <- icarol_2016 %>% group_by(zip_code, need_name) %>% tally()
 #reformat data 
 
 needs_zip_treemap16 <- rename(needs_zip_treemap16, zipcode = zip_code, value = n)
-needs_zip_treemap16 <- mutate(needs_zip_treemap16, year = 2016)
+needs_zip_treemap16 <- mutate(needs_zip_treemap16, Year = 2016)
 
 
 #2017
@@ -54,7 +54,7 @@ icarol_2017 <- filter(icarol_2017, call_type != "Disconnect")
 
 needs_zip_treemap17 <- icarol_2017 %>% group_by(zip_code, need_name) %>% tally()
 needs_zip_treemap17 <- rename(needs_zip_treemap17, zipcode = zip_code, value = n)
-needs_zip_treemap17 <- mutate(needs_zip_treemap17, year = 2017)
+needs_zip_treemap17 <- mutate(needs_zip_treemap17, Year = 2017)
 
 
 #create one object and saving

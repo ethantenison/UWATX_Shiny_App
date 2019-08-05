@@ -60,10 +60,10 @@ for (i in 1:length(icarol_2016$age)){
 icarol_2016 <- mutate(icarol_2016, count = 1)
 
 date2016 <- ymd(20160101)
-icarol_2016 <- mutate(icarol_2016, year = date2016)
+icarol_2016 <- mutate(icarol_2016, Year = date2016)
 icarol_2016 <- rename(icarol_2016, zipcode = zip_code)
 
-treemap_master16<- select(icarol_2016, year, zipcode, age, gender, preferred_language, need_name,
+treemap_master16<- select(icarol_2016, Year, zipcode, age, gender, preferred_language, need_name,
                           count)
 
 #2017
@@ -117,10 +117,10 @@ for (i in 1:length(icarol_2017$age)){
 icarol_2017 <- mutate(icarol_2017, count = 1)
 
 date2017 <- ymd(20170101)
-icarol_2017 <- mutate(icarol_2017, year = date2017)
+icarol_2017 <- mutate(icarol_2017, Year = date2017)
 icarol_2017 <- rename(icarol_2017, zipcode = zip_code)
 
-treemap_master17<- select(icarol_2017, year, zipcode, age, gender, preferred_language, need_name,
+treemap_master17<- select(icarol_2017, Year, zipcode, age, gender, preferred_language, need_name,
                           count)
 #binding and saving 
 treemap_master <- bind_rows(treemap_master16, treemap_master17)

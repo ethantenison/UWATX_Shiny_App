@@ -9,7 +9,7 @@ data <- read_rds("./R Objects/data_4_download.RDS")
 
 convert_columns <- colnames(data[3:24])
 
-data_4_analysis <- reshape(data, idvar = c("date", "zipcode"), varying = c(convert_columns),
+data_4_analysis <- reshape(data, idvar = c("Year", "zipcode"), varying = c(convert_columns),
                           v.name = c("statistic"), times = c(convert_columns),
                           new.row.names = 1:2288, direction = "long")
 
@@ -65,7 +65,8 @@ zip <- zip %>% select(GEOID10, geometry) %>% rename(zipcode = GEOID10)
 data_4_analysis$zipcode <- as.character(data_4_analysis$zipcode)
 
 data_4_analysis <- left_join(data_4_analysis, zip, by = "zipcode")
-data_4_analysis <- rename(data_4_analysis, year = date)
+data_4_analysis <- rename(data_4_analysis, measures = displayed_measure)
+
 
 #Save R object 
 saveRDS(data_4_analysis, file = "./R Objects/data_4_analysis.RDS")
