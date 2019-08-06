@@ -66,6 +66,11 @@ data_4_analysis$zipcode <- as.character(data_4_analysis$zipcode)
 
 data_4_analysis <- left_join(data_4_analysis, zip, by = "zipcode")
 data_4_analysis <- rename(data_4_analysis, measures = displayed_measure)
+data_4_analysis <- mutate(data_4_analysis, stat = value)
+data_4_analysis <- select(data_4_analysis, Year, zipcode, measure, value, stat, 
+                          geometry, measures, category)
+
+data_4_analysis <- st_sf(data_4_analysis)
 
 
 #Save R object 

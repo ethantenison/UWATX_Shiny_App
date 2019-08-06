@@ -66,7 +66,7 @@ travis <- read_rds("R objects/data_4_analysis.rds") %>%
   filter(!str_detect(zipcode, filter_out))  %>% 
   group_by(Year, measure) %>% 
   mutate(rank = dense_rank(desc(value))) %>% 
-  ungroup() %>% st_sf()
+  ungroup()
 
 travis_summ <- read_rds("R Objects/summ211.rds")
 
