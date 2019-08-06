@@ -652,7 +652,7 @@ server <- function (input, output, session) {
     
     metro2 <- reactive({
       
-      m <- needs_zip_treemap[needs_zip_treemap$zipcode == click_zip(), ] 
+      m <- needs_zip_treemap[needs_zip_treemap$zip_code == click_zip(), ] 
       
       return(m)
       
@@ -819,8 +819,8 @@ server <- function (input, output, session) {
     
     output$treemap <- renderHighchart({
       
-      needs_zip_treemap_int <- needs_zip_treemap[needs_zip_treemap$zipcode == click_zip(), ] %>% 
-        filter(Year == input$year)
+      needs_zip_treemap_int <- needs_zip_treemap[needs_zip_treemap$zip_code == click_zip(), ] %>% 
+        filter(year == input$year) #this is the only one where it has to be lower case. 
       
       hctreemap2(needs_zip_treemap_int,
                  group_vars = c("needs_category"),
