@@ -24,7 +24,7 @@ icarol_2016 <- filter(icarol_2016, zip_code
 
 icarol_2016 <- filter(icarol_2016, call_type != "Transfer")
 icarol_2016 <- filter(icarol_2016, call_type != "Disconnect")
-icarol_2016 <- select(icarol_2016, age, zip_code, gender, preferred_language, need_name)
+icarol_2016 <- select(icarol_2016, age, zip_code, gender, preferred_language, military_branch, military_status, need_name)
 
 #reassigning age into bins
 for (i in 1:length(icarol_2016$age)){
@@ -63,8 +63,8 @@ date2016 <- ymd(20160101)
 icarol_2016 <- mutate(icarol_2016, Year = date2016)
 icarol_2016 <- rename(icarol_2016, zipcode = zip_code)
 
-treemap_master16<- select(icarol_2016, Year, zipcode, age, gender, preferred_language, need_name,
-                          count)
+treemap_master16<- select(icarol_2016, Year, zipcode, age, gender, preferred_language,
+                          military_branch, military_status, need_name,count)
 
 #2017
 icarol_2017 <- openxlsx::read.xlsx("./211 Data/2017 iCarol Export 1.3.18.xlsx", 
@@ -83,7 +83,8 @@ icarol_2017 <- filter(icarol_2017, zip_code
 
 icarol_2017 <- filter(icarol_2017, call_type != "Transfer")
 icarol_2017 <- filter(icarol_2017, call_type != "Disconnect")
-icarol_2017 <- select(icarol_2017, age, zip_code, gender, preferred_language, need_name)
+icarol_2017 <- select(icarol_2017, age, zip_code, gender, preferred_language, 
+                      military_branch, military_status, need_name)
 
 for (i in 1:length(icarol_2017$age)){
   if(icarol_2017$age[i] <= 12){        
@@ -120,8 +121,25 @@ date2017 <- ymd(20170101)
 icarol_2017 <- mutate(icarol_2017, Year = date2017)
 icarol_2017 <- rename(icarol_2017, zipcode = zip_code)
 
-treemap_master17<- select(icarol_2017, Year, zipcode, age, gender, preferred_language, need_name,
-                          count)
+treemap_master17<- select(icarol_2017, Year, zipcode, age, gender, preferred_language,
+                          military_branch, military_status,need_name, count)
 #binding and saving 
 treemap_master <- bind_rows(treemap_master16, treemap_master17)
+
+for (i in 1:length(treemap_master$military_branch)){
+  if(is.na(treemap_master$military_branch[i])){        
+    treemap_master$military_branch <- "Undetermined"               
+  }
+}
+
+
+for (i in 1:length(treemap_master$military_status)){
+  if(is.na(treemap_master$military_status[i])){        
+    treemap_master$military_status[i] <- "Undetermined"               
+  }
+  else if(treemap_master$military_status[i] == "Did Not Ask"){        
+    treemap_master$military_status[i] <- "Undetermined"              
+  }
+}
+
 saveRDS(treemap_master, file = "./R Objects/treemap_master.RDS")

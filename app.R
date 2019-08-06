@@ -64,9 +64,9 @@ travis_dl <- read_rds("R Objects/data_4_download.rds")
 
 travis <- read_rds("R objects/data_4_analysis.rds") %>%
   filter(!str_detect(zipcode, filter_out))  %>% 
-  group_by(year, measure) %>% 
+  group_by(Year, measure) %>% 
   mutate(rank = dense_rank(desc(value))) %>% 
-  ungroup()
+  ungroup() %>% st_sf()
 
 travis_summ <- read_rds("R Objects/summ211.rds")
 
@@ -193,11 +193,7 @@ sidebar <- dashboardSidebar(
                                   "Military Status" = "military_status",
                                   "Zip Code" = "zipcode"),
                       selected = "gender"))
-      # div(id = "Box15",
-      # downloadButton('downloadCSV', label = 'Download Data', style="display: block; margin: 0 auto; width: 200px;color: #152934;"))
-      # actionButton("help", "Tutorial", icon = icon("book-open"), style="color: #152934;"),
-      # HTML("<button type='button' class='btn btn-default action-button shiny-bound-input' style='display: block; margin: 6px 5px 6px 15px; width: 200px;color: #152934;' onclick = 'shinyjs.toggleFullScreen();'><i class='fa fa-expand'></i> Fullscreen</button>")
-    ),
+      ),
     hr(style="margin-top: 5px; margin-bottom: 5px; width:90%"),
     menuItem("The Index", icon = icon("book"), tabName = "about"),
     hr(style="margin-top: 5px; margin-bottom: 5px; width:90%"),
@@ -205,7 +201,7 @@ sidebar <- dashboardSidebar(
     actionButton("show", "Learn More", icon = icon("info-circle", class = "fa-pull-left"), style="color: #152934"),
     HTML("<button type='button' class='btn btn-default action-button shiny-bound-input' style='display: block; margin: 6px 5px 6px 15px; width: 200px;color: #152934;' onclick = 'shinyjs.toggleFullScreen();'><i class='fa fa-expand fa-pull-left'></i> Fullscreen</button>"),
     hr(style="margin-top: 15px; margin-bottom: 5px; width:90%")
-    # HTML("<h4 style='color:#ffffff; margin-left:17px; margin-right:2px'>About The Dashboard</h4>")
+    
   )
 )
 
@@ -247,11 +243,10 @@ body <- dashboardBody(
                                     ),
                                     column(width = 6, style = "margin-top: 12px;",
                                            selectInput("category", "Select A Profile Category:",
-                                                       choices = c("Gender" = "Gender",
-                                                                   "Demographics" = "Race",
-                                                                   "Parenting" = "Parenting",
-                                                                   "Poverty" = "PovIncome",
-                                                                   "Education & Health" = "EdHealth"),
+                                                       choices = c("Demographics" = "Race",
+                                                                   "Insurance Coverage" = "Insurance",
+                                                                   "Poverty" = "Financial",
+                                                                   "Education" = "Education"),
                                                        selected = "Race"),
                                            # data.hint = "Use this to explore different population topics. For instance, the Demographics category tells us the breakdown of different demographic populations living in a given zip code."
                                            
@@ -886,7 +881,7 @@ server <- function (input, output, session) {
           hc_theme_merge(
             hc_theme_tufte(),
             hc_theme(chart = list(
-              # backgroundColor = "#f4f7fb",
+             
               style = list(fontFamily = "Roboto")))))
       
     })
