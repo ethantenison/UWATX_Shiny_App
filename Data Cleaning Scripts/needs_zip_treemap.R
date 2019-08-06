@@ -61,5 +61,15 @@ needs_zip_treemap17 <- mutate(needs_zip_treemap17, Year = 2017)
 needs_zip_treemap <- bind_rows(needs_zip_treemap16, needs_zip_treemap17)
 needs_zip_treemap <- na.omit(needs_zip_treemap)
 needs_zip_treemap <- filter(needs_zip_treemap, value >5)
+needs_zip_treemap$Year <- as.character(needs_zip_treemap$Year)
+needs_zip_treemap$value <- as.numeric(needs_zip_treemap$value)
+
+
+needs_zip_treemap <- rename(needs_zip_treemap, "Zip Code" = zipcode, "Value" = value, 
+                            "Needs Category" = need_name)
+
+
+
+
 saveRDS(needs_zip_treemap, file = "./R Objects/needs_zip_treemap.RDS")
 
