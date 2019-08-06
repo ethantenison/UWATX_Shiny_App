@@ -51,7 +51,7 @@ treemap_master <- read_rds("data/treemap_master.rds") %>%
   mutate(age = as.character(age))
 
 #TREEMAP DATA - ZIP & NEEDS
-needs_zip_treemap <- read_rds("data/needs_zip_treemap.rds") %>%
+needs_zip_treemap <- read_rds("Old R objects/needs_zip_treemap.rds") %>%
   ungroup() %>% 
   janitor::clean_names() %>%
   mutate(day = as.character("01"),
@@ -60,19 +60,19 @@ needs_zip_treemap <- read_rds("data/needs_zip_treemap.rds") %>%
   mutate(date = as.Date(date, "%Y-%m-%d")) %>% 
   rename(Year = date)
 
-travis_dl <- read_rds("data/travis_dl.rds")
+travis_dl <- read_rds("Old R Objects/travis_dl.rds")
 
-travis <- read_rds("data/travis_tidy.rds") %>%
+travis <- read_rds("Old R Objects/travis_tidy.rds") %>%
   filter(!str_detect(zipcode, filter_out))  %>% 
   group_by(Year, measure) %>% 
   mutate(rank = dense_rank(desc(value))) %>% 
   ungroup()
 
-travis_wide <- read_rds("data/travis_wide.rds")
+travis_wide <- read_rds("Old R Objects/travis_wide.rds")
   
-travis_summ <- read_rds("data/summ211data.rds")
+travis_summ <- read_rds("Old R Objects/summ211data.rds")
 
-travis_county_sf <- read_rds("data/traviscounty.rds")
+travis_county_sf <- read_rds("Old R Objects/traviscounty.rds")
 
 # ------------------------------- #
 # ------------------------------- #
