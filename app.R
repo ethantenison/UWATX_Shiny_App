@@ -20,6 +20,7 @@ library(htmlwidgets)
 library(dplyr)
 library(stringr)
 library(magrittr)
+library(viridis)
 library(viridisLite)
 library(readr)
 library(tidyr)
@@ -887,7 +888,7 @@ server <- function (input, output, session) {
     })
     
     pal <- colorNumeric(
-      palette = "PuBu", n = 10,
+      palette = "viridis", n = 10,
       domain = travis_leaf$value)
     
     legend_title <- travis %>% 
