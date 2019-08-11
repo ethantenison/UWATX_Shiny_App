@@ -43,7 +43,7 @@ blank <- "https://api.mapbox.com/styles/v1/mrw03b/cjjd6srrl7ot42so3cbjxn6ot/tile
 northstar <- "https://api.mapbox.com/styles/v1/mrw03b/cj48wz0xh15td2st5hcmeqmsv/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibXJ3MDNiIiwiYSI6IlYwb2FiOWcifQ.RWUm2a87fEC9XrDxzvZKKg"
 map_attr <- "© <a href='https://www.mapbox.com/map-feedback/'>Mapbox</a> | Map © <a href='http://www.unitedwayaustin.org/our-work/2gen/'>United Way of Greater Austin</a>"
 
-full_zips_list <- "78617|78641|78645|78652|78653|78660|78701|78702|78703|78704|78719|78721|78722|78723|78724|78725|78727|78728|78730|78731|78732|78733|78734|78735|78736|78738|78739|78741|78742|78743|78744|78745|78746|78747|78748|78749|78750|78751|78752|78753|78754|78756|78757|78758|78759|78654|78610|78621|78615|78669|78737|78620|78726"
+full_zips_list <- "78705|78617|78641|78645|78652|78653|78660|78701|78702|78703|78704|78719|78721|78722|78723|78724|78725|78727|78728|78730|78731|78732|78733|78734|78735|78736|78738|78739|78741|78742|78743|78744|78745|78746|78747|78748|78749|78750|78751|78752|78753|78754|78756|78757|78758|78759|78654|78610|78621|78615|78669|78737|78620|78726"
 
 filter_out <- "78712|78743"
 
@@ -153,9 +153,9 @@ sidebar <- dashboardSidebar(
                                                                 "Coverage Rate: Private Insurance" = "percent_with_private_insurance",
                                                                 "Coverage Rate: Public Insurance" = "percent_with_public_insurance"),
                                          
-                                         "Children & the Elderly" = c("Total Children Under 6 Years of Age" = "children_under6",
-                                                                      "Children Under 6 Years Old" = "percent_under6",
-                                                                      "Elderly Over 60 years Old" = "percent_over60"
+                                         "Children & the Elderly" = c("Total number of Children Under 6 Years of Age" = "children_under6",
+                                                                      "Children Under 6 (%)" = "percent_under6",
+                                                                      "Adults Over 60 (%)" = "percent_over60"
                                          )),
             selected = "Calls_per100HH")),
       div(id = "BoxDownload",
