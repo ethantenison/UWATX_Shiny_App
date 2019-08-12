@@ -15,7 +15,7 @@ demography_2016 <- clean_names(demography_2016)
 demography_2016 <- rename(demography_2016, zipcode = id2)
 demography_2016 <- demography_2016 %>% mutate_each(funs(as.character))
 demography_2016 <- demography_2016 %>% mutate_each(funs(as.numeric))
-demography_2016 <- filter(demography_2016, zipcode %in% c( 78617,78641,78645,78652,78653,78660,78701,78702
+demography_2016 <- filter(demography_2016, zipcode %in% c( 78705,78617,78641,78645,78652,78653,78660,78701,78702
                                                            ,78703,78704,78719,78721,78722,78723,78724,78725
                                                            ,78727,78728,78730,78731,78732,78733,78734,78735
                                                            ,78736,78738,78739,78741,78742,78743,78744,78745
@@ -51,7 +51,7 @@ demography_2017 <- clean_names(demography_2017)
 demography_2017 <- rename(demography_2017, zipcode = id2)
 demography_2017 <- demography_2017 %>% mutate_each(funs(as.character))
 demography_2017 <- demography_2017 %>% mutate_each(funs(as.numeric))
-demography_2017 <- filter(demography_2017, zipcode %in% c( 78617,78641,78645,78652,78653,78660,78701,78702
+demography_2017 <- filter(demography_2017, zipcode %in% c( 78705,78617,78641,78645,78652,78653,78660,78701,78702
                                                            ,78703,78704,78719,78721,78722,78723,78724,78725
                                                            ,78727,78728,78730,78731,78732,78733,78734,78735
                                                            ,78736,78738,78739,78741,78742,78743,78744,78745

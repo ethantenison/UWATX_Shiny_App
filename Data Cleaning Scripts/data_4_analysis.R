@@ -52,7 +52,7 @@ data_4_analysis <- mutate(data_4_analysis, category = recode(data_4_analysis$mea
   #Adding Geograpic Values
 library(sf)
 zip <- read_sf(dsn = ".", layer = "tl_2015_us_zcta510")
-zip <- filter(zip, GEOID10 %in% c( 78617,78641,78645,78652,78653,78660,78701,78702
+zip <- filter(zip, GEOID10 %in% c( 78705,78617,78641,78645,78652,78653,78660,78701,78702
                                                          ,78703,78704,78719,78721,78722,78723,78724,78725
                                                          ,78727,78728,78730,78731,78732,78733,78734,78735
                                                          ,78736,78738,78739,78741,78742,78743,78744,78745

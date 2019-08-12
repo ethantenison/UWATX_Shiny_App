@@ -16,7 +16,7 @@ under6_2016 <- clean_names(under6_2016)
 under6_2016 <- rename(under6_2016, zipcode = id2)
 under6_2016 <- under6_2016 %>% mutate_each(funs(as.character))
 under6_2016 <- under6_2016 %>% mutate_each(funs(as.numeric))
-under6_2016 <- filter(under6_2016, zipcode %in% c( 78617,78641,78645,78652,78653,78660,78701,78702
+under6_2016 <- filter(under6_2016, zipcode %in% c( 78705,78617,78641,78645,78652,78653,78660,78701,78702
                                                    ,78703,78704,78719,78721,78722,78723,78724,78725
                                                    ,78727,78728,78730,78731,78732,78733,78734,78735
                                                    ,78736,78738,78739,78741,78742,78743,78744,78745
@@ -29,7 +29,7 @@ total_pop_2016 <- clean_names(total_pop_2016)
 total_pop_2016 <- rename(total_pop_2016, zipcode = id2)
 total_pop_2016 <- total_pop_2016 %>% mutate_each(funs(as.character))
 total_pop_2016 <- total_pop_2016 %>% mutate_each(funs(as.numeric))
-total_pop_2016 <- filter(total_pop_2016, zipcode %in% c( 78617,78641,78645,78652,78653,78660,78701,78702
+total_pop_2016 <- filter(total_pop_2016, zipcode %in% c( 78705,78617,78641,78645,78652,78653,78660,78701,78702
                                                          ,78703,78704,78719,78721,78722,78723,78724,78725
                                                          ,78727,78728,78730,78731,78732,78733,78734,78735
                                                          ,78736,78738,78739,78741,78742,78743,78744,78745
@@ -58,7 +58,7 @@ under6_2017 <- clean_names(under6_2017)
 under6_2017 <- rename(under6_2017, zipcode = id2)
 under6_2017 <- under6_2017 %>% mutate_each(funs(as.character))
 under6_2017 <- under6_2017 %>% mutate_each(funs(as.numeric))
-under6_2017 <- filter(under6_2017, zipcode %in% c( 78617,78641,78645,78652,78653,78660,78701,78702
+under6_2017 <- filter(under6_2017, zipcode %in% c( 78705,78617,78641,78645,78652,78653,78660,78701,78702
                                                    ,78703,78704,78719,78721,78722,78723,78724,78725
                                                    ,78727,78728,78730,78731,78732,78733,78734,78735
                                                    ,78736,78738,78739,78741,78742,78743,78744,78745
@@ -71,7 +71,7 @@ total_pop_2017 <- clean_names(total_pop_2017)
 total_pop_2017 <- rename(total_pop_2017, zipcode = id2)
 total_pop_2017 <- total_pop_2017 %>% mutate_each(funs(as.character))
 total_pop_2017 <- total_pop_2017 %>% mutate_each(funs(as.numeric))
-total_pop_2017 <- filter(total_pop_2017, zipcode %in% c( 78617,78641,78645,78652,78653,78660,78701,78702
+total_pop_2017 <- filter(total_pop_2017, zipcode %in% c( 78705,78617,78641,78645,78652,78653,78660,78701,78702
                                                          ,78703,78704,78719,78721,78722,78723,78724,78725
                                                          ,78727,78728,78730,78731,78732,78733,78734,78735
                                                          ,78736,78738,78739,78741,78742,78743,78744,78745

@@ -12,7 +12,7 @@ medianRent_2016 <- clean_names(medianRent_2016)
 medianRent_2016 <- rename(medianRent_2016, zipcode = id2)
 medianRent_2016 <- medianRent_2016 %>% mutate_each(funs(as.character))
 medianRent_2016 <- medianRent_2016 %>% mutate_each(funs(as.numeric))
-medianRent_2016 <- filter(medianRent_2016, zipcode %in% c( 78617,78641,78645,78652,78653,78660,78701,78702
+medianRent_2016 <- filter(medianRent_2016, zipcode %in% c( 78705,78617,78641,78645,78652,78653,78660,78701,78702
                                                            ,78703,78704,78719,78721,78722,78723,78724,78725
                                                            ,78727,78728,78730,78731,78732,78733,78734,78735
                                                            ,78736,78738,78739,78741,78742,78743,78744,78745
@@ -35,7 +35,7 @@ medianRent_2017 <- clean_names(medianRent_2017)
 medianRent_2017 <- rename(medianRent_2017, zipcode = id2)
 medianRent_2017 <- medianRent_2017 %>% mutate_each(funs(as.character))
 medianRent_2017 <- medianRent_2017 %>% mutate_each(funs(as.numeric))
-medianRent_2017 <- filter(medianRent_2017, zipcode %in% c( 78617,78641,78645,78652,78653,78660,78701,78702
+medianRent_2017 <- filter(medianRent_2017, zipcode %in% c( 78705,78617,78641,78645,78652,78653,78660,78701,78702
                                                            ,78703,78704,78719,78721,78722,78723,78724,78725
                                                            ,78727,78728,78730,78731,78732,78733,78734,78735
                                                            ,78736,78738,78739,78741,78742,78743,78744,78745

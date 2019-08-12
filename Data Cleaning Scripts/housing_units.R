@@ -14,7 +14,7 @@ housing_units_2016 <- rename(housing_units_2016, zipcode = GEO.id2, housing_unit
 housing_units_2016 <- housing_units_2016[2:1942,]
 housing_units_2016 <- mutate(housing_units_2016, zipcode = as.numeric(as.character(zipcode)), 
                              housing_units = as.numeric(as.character(housing_units)))
-housing_units_2016 <- filter(housing_units_2016, zipcode %in% c( 78617,78641,78645,78652,78653,78660,78701,78702
+housing_units_2016 <- filter(housing_units_2016, zipcode %in% c( 78705,78617,78641,78645,78652,78653,78660,78701,78702
                                                                  ,78703,78704,78719,78721,78722,78723,78724,78725
                                                                  ,78727,78728,78730,78731,78732,78733,78734,78735
                                                                  ,78736,78738,78739,78741,78742,78743,78744,78745
@@ -32,7 +32,7 @@ housing_units_2017 <- rename(housing_units_2017, zipcode = GEO.id2, housing_unit
 housing_units_2017 <- housing_units_2017[2:1942,]
 housing_units_2017 <- mutate(housing_units_2017, zipcode = as.numeric(as.character(zipcode)), 
                              housing_units = as.numeric(as.character(housing_units)))
-housing_units_2017 <- filter(housing_units_2017, zipcode %in% c( 78617,78641,78645,78652,78653,78660,78701,78702
+housing_units_2017 <- filter(housing_units_2017, zipcode %in% c( 78705,78617,78641,78645,78652,78653,78660,78701,78702
                                                                  ,78703,78704,78719,78721,78722,78723,78724,78725
                                                                  ,78727,78728,78730,78731,78732,78733,78734,78735
                                                                  ,78736,78738,78739,78741,78742,78743,78744,78745
