@@ -14,6 +14,7 @@ library(scales) #to convert to percent
 library(lubridate) #converting time 
 library(readr) #reading in data
 library(openxlsx) #reading excel sheets 
+library(readr)
 ```
 
 ## Demographic Information 
