@@ -218,6 +218,7 @@ body <- dashboardBody(
             fluidRow(
               column(width = 6,
                      h1("The 211 Community Explorer"),
+                     h4("Click a zip code to start exploring. To find out more, click the tutorial tap in the side bar"),
                      hr(),
                      box(width = 12, height = "630px",
                          h4(textOutput("indicatortext")),
@@ -252,7 +253,7 @@ body <- dashboardBody(
                                            # data.hint = "Use this to explore different population topics. For instance, the Demographics category tells us the breakdown of different demographic populations living in a given zip code."
                                            
                                            highchartOutput("zip_profile", height = "350px", width = "90%"))),
-                           tabPanel("Need Profile",
+                           tabPanel("Breakdown of 211 Calls by Need",
                                     h3(textOutput("treemapheader")),
                                     highchartOutput("treemap", height = 600)
                            )
