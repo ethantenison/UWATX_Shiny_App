@@ -1,5 +1,4 @@
 #Treemap 
-library(xlsx)
 library(dplyr)
 library(janitor)
 library(readr)

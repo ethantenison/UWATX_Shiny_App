@@ -1,5 +1,4 @@
 #treemap master document with more details about calls 
-library(xlsx)
 library(dplyr)
 library(janitor)
 library(readr)
