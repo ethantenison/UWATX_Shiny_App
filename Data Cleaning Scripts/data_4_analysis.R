@@ -11,7 +11,7 @@ convert_columns <- colnames(data[3:24])
 
 data_4_analysis <- reshape(data, idvar = c("Year", "zipcode"), varying = c(convert_columns),
                           v.name = c("value"), times = c(convert_columns),
-                          new.row.names = 1:2288, direction = "long")
+                          new.row.names = 1:2332, direction = "long")
 
 data_4_analysis <- rename(data_4_analysis, measure = time)
 
