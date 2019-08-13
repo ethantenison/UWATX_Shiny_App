@@ -327,7 +327,7 @@ body <- dashboardBody(
                        fluidRow(
                          div(id = "index3A", style = "padding-left: 10px !important; padding-right:10px !important",
                              box(
-                               includeMarkdown("tooltips/gender.md"),
+                               includeMarkdown("tooltips/medianrent.md"),
                                title = "Median Rent", 
                                footer = HTML("<a href='https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_17_5YR_B25064&prodType=table'>Source: American Community Survey, 5-Year 'MEDIAN GROSS RENT (DOLLARS)'</a>"),
                                status = "primary", 
@@ -336,7 +336,7 @@ body <- dashboardBody(
                                collapsed = TRUE
                              ),
                              box(
-                               includeMarkdown("tooltips/marriedsingle.md"),
+                               includeMarkdown("tooltips/medianfamincome.md"),
                                title = "Median Family Income", 
                                footer = HTML("<a href='https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_17_5YR_B19126&prodType=table'>Source: American Community Survey, 5-Year 'MEDIAN FAMILY INCOME'</a>"),
                                status = "primary", 
@@ -367,7 +367,7 @@ body <- dashboardBody(
                        fluidRow(
                          div(id = "index5A", style = "padding-left: 10px !important; padding-right:10px !important",
                              box(
-                               includeMarkdown("tooltips/fampov.md"),
+                               includeMarkdown("tooltips/insurance.md"),
                                title = "Insurance Coverage", 
                                footer = HTML("<a href='https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_17_5YR_DP03&prodType=table'>Source: American Community Survey, 5-Year 'SELECTED ECONOMIC CHARACTERISTICS'</a>"),
                                status = "primary", 
@@ -376,7 +376,7 @@ body <- dashboardBody(
                                collapsed = TRUE
                              ),
                              box(
-                               includeMarkdown("tooltips/educationhealth.md"),
+                               includeMarkdown("tooltips/education.md"),
                                title = "Educational Attainment", 
                                footer = HTML("<a href='https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_17_5YR_B15003&prodType=table'>Source: American Community Survey, 5-Year 'EDUCATIONAL ATTAINMENT FOR THE POPULATION 25 YEARS AND OVER'</a>"),
                                status = "primary", 
@@ -387,7 +387,7 @@ body <- dashboardBody(
                        fluidRow(
                          div(id = "index5A", style = "padding-left: 10px !important; padding-right:10px !important",
                              box(
-                               includeMarkdown("tooltips/fampov.md"),
+                               includeMarkdown("tooltips/age2.md"),
                                title = "Children Under 6 Years", 
                                footer = HTML("<a href='https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_17_5YR_B09001&prodType=table'>Source: American Community Survey, 5-Year 'POPULATION UNDER 18 YEARS BY AGE'</a>"),
                                status = "primary", 
@@ -396,7 +396,7 @@ body <- dashboardBody(
                                collapsed = TRUE
                              ),
                              box(
-                               includeMarkdown("tooltips/educationhealth.md"),
+                               includeMarkdown("tooltips/age2.md"),
                                title = "Adults over 60", 
                                footer = HTML("<a href='https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_17_5YR_S0101&prodType=table'>Source: American Community Survey, 5-Year 'AGE AND SEX '</a>"),
                                status = "primary", 
