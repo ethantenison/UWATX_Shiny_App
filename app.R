@@ -309,7 +309,7 @@ body <- dashboardBody(
                              box(
                                includeMarkdown("tooltips/households.md"),
                                title = "Total Households", 
-                               footer = HTML("<a href='https://www.census.gov/programs-surveys/acs/technical-documentation/code-lists.html'>Source: American Community Survey, 5-Year 'Subject Definitions'</a>"),
+                               footer = HTML("<a href='https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_17_5YR_DP04&prodType=table'>Source: American Community Survey, 5-Year 'SELECTED HOUSING CHARACTERISTICS '</a>"),
                                status = "primary", 
                                solidHeader = TRUE,
                                collapsible = TRUE,
@@ -318,7 +318,7 @@ body <- dashboardBody(
                              box(
                                includeMarkdown("tooltips/mhv.md"),
                                title = "Median Household Value", 
-                               footer = HTML("<a href='https://www.census.gov/programs-surveys/acs/technical-documentation/code-lists.html'>Source: American Community Survey, 5-Year 'Subject Definitions'</a>"),
+                               footer = HTML("<a href='https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_17_5YR_DP04&prodType=table'>Source: American Community Survey, 5-Year 'SELECTED HOUSING CHARACTERISTICS '</a>"),
                                status = "primary", 
                                solidHeader = TRUE,
                                collapsible = TRUE,
@@ -328,8 +328,8 @@ body <- dashboardBody(
                          div(id = "index3A", style = "padding-left: 10px !important; padding-right:10px !important",
                              box(
                                includeMarkdown("tooltips/gender.md"),
-                               title = "Gender Indicators", 
-                               footer = HTML("<a href='https://www.census.gov/programs-surveys/acs/technical-documentation/code-lists.html'>Source: American Community Survey, 5-Year 'Subject Definitions'</a>"),
+                               title = "Median Rent", 
+                               footer = HTML("<a href='https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_17_5YR_B25064&prodType=table'>Source: American Community Survey, 5-Year 'MEDIAN GROSS RENT (DOLLARS)'</a>"),
                                status = "primary", 
                                solidHeader = TRUE,
                                collapsible = TRUE,
@@ -337,8 +337,8 @@ body <- dashboardBody(
                              ),
                              box(
                                includeMarkdown("tooltips/marriedsingle.md"),
-                               title = "Parenting Status Indicators", 
-                               footer = HTML("<a href='https://www.census.gov/programs-surveys/acs/technical-documentation/code-lists.html'>Source: American Community Survey, 5-Year 'Subject Definitions'</a>"),
+                               title = "Median Family Income", 
+                               footer = HTML("<a href='https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_17_5YR_B19126&prodType=table'>Source: American Community Survey, 5-Year 'MEDIAN FAMILY INCOME'</a>"),
                                status = "primary", 
                                solidHeader = TRUE,
                                collapsible = TRUE,
@@ -349,7 +349,7 @@ body <- dashboardBody(
                              box(
                                includeMarkdown("tooltips/demographics.md"),
                                title = "Demographic Indicators", 
-                               footer = HTML("<a href='https://www.census.gov/programs-surveys/acs/technical-documentation/code-lists.html'>Source: American Community Survey, 5-Year 'Subject Definitions'</a>"),
+                               footer = HTML("<a href='https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_17_5YR_DP05&prodType=table'>Source: American Community Survey, 5-Year 'DEMOGRAPHIC AND HOUSING ESTIMATES '</a>"),
                                status = "primary", 
                                solidHeader = TRUE,
                                collapsible = TRUE,
@@ -357,8 +357,8 @@ body <- dashboardBody(
                              ),
                              box(
                                withMathJax(includeMarkdown("tooltips/incomepoverty.md")),
-                               title = "Income To Poverty Ratios", 
-                               footer = HTML("<a href='https://www.census.gov/programs-surveys/acs/technical-documentation/code-lists.html'>Source: American Community Survey, 5-Year 'Subject Definitions'</a>"),
+                               title = "Income To Poverty Ratio", 
+                               footer = HTML("<a href='https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_17_5YR_S1701&prodType=table'>Source: American Community Survey, 5-Year 'POVERTY STATUS IN THE PAST 12 MONTHS'</a>"),
                                status = "primary", 
                                solidHeader = TRUE,
                                collapsible = TRUE,
@@ -368,8 +368,8 @@ body <- dashboardBody(
                          div(id = "index5A", style = "padding-left: 10px !important; padding-right:10px !important",
                              box(
                                includeMarkdown("tooltips/fampov.md"),
-                               title = "Family Poverty Status", 
-                               footer = HTML("<a href='https://www.census.gov/programs-surveys/acs/technical-documentation/code-lists.html'>Source: American Community Survey, 5-Year 'Subject Definitions'</a>"),
+                               title = "Insurance Coverage", 
+                               footer = HTML("<a href='https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_17_5YR_DP03&prodType=table'>Source: American Community Survey, 5-Year 'SELECTED ECONOMIC CHARACTERISTICS'</a>"),
                                status = "primary", 
                                solidHeader = TRUE,
                                collapsible = TRUE,
@@ -377,8 +377,28 @@ body <- dashboardBody(
                              ),
                              box(
                                includeMarkdown("tooltips/educationhealth.md"),
-                               title = "Educational Attainment & Health Insurance", 
-                               footer = HTML("<a href='https://www.census.gov/programs-surveys/acs/technical-documentation/code-lists.html'>Source: American Community Survey, 5-Year 'Subject Definitions'</a>"),
+                               title = "Educational Attainment", 
+                               footer = HTML("<a href='https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_17_5YR_B15003&prodType=table'>Source: American Community Survey, 5-Year 'EDUCATIONAL ATTAINMENT FOR THE POPULATION 25 YEARS AND OVER'</a>"),
+                               status = "primary", 
+                               solidHeader = TRUE,
+                               collapsible = TRUE,
+                               collapsed = TRUE
+                             ))),
+                       fluidRow(
+                         div(id = "index5A", style = "padding-left: 10px !important; padding-right:10px !important",
+                             box(
+                               includeMarkdown("tooltips/fampov.md"),
+                               title = "Children Under 6 Years", 
+                               footer = HTML("<a href='https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_17_5YR_B09001&prodType=table'>Source: American Community Survey, 5-Year 'POPULATION UNDER 18 YEARS BY AGE'</a>"),
+                               status = "primary", 
+                               solidHeader = TRUE,
+                               collapsible = TRUE,
+                               collapsed = TRUE
+                             ),
+                             box(
+                               includeMarkdown("tooltips/educationhealth.md"),
+                               title = "Adults over 60", 
+                               footer = HTML("<a href='https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_17_5YR_S0101&prodType=table'>Source: American Community Survey, 5-Year 'AGE AND SEX '</a>"),
                                status = "primary", 
                                solidHeader = TRUE,
                                collapsible = TRUE,
