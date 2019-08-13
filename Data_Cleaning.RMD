@@ -700,7 +700,7 @@ saveRDS(under6, file = "./R Objects/under6.RDS")
 
 ## Treemap Master 
 
-The UW icarol file was used to ocreate the treemap master. This document shows every single 211 referral along with year,zip, age, gender, language, military status, and the name of the need. Calls that were transfered or disconnected were removed. Age has been changed to reflect discrete categories, such as 13-18 year olds and 60 and up. In addition, all missing values were changed to "undetermined".
+The UW icarol file was used to ocreate the treemap master. This document shows every single 211 referral along with year,zip, age, gender, language, military status, and the name of the need. Calls that were transfered or disconnected were removed. Age has been changed to reflect discrete categories, such as 13-18 year olds and 60 and up. In addition, veterans who did not report military status was changed to "undetermined".
 
 ```{R}
 

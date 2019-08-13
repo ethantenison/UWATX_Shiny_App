@@ -123,7 +123,7 @@ sidebar <- dashboardSidebar(
                       value= as.Date("2016-01-01"),
                       timeFormat= "%Y",
                       step = 365,
-                      animate = animationOptions(interval = 1000))),
+                      )),
       div(id = "BoxIndicator",
           selectInput(
             inputId = "indicator",
@@ -496,7 +496,7 @@ server <- function (input, output, session) {
                  "nextLabel"="Next",
                  "prevLabel"="Previous",
                  "skipLabel"="Exit"),
-                 events = list("oncomplete"=I('alert("Thanks! Also, check out the Index for more information about the data represented here.")')))
+               )
   )
   
   observeEvent(input$show, {
