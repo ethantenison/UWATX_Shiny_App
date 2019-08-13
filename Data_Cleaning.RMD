@@ -27,7 +27,7 @@ Most was obtained using American Factfinder. The geography selected was the "5-D
 
 The data for demographic information came from the "ACS DEMOGRAPHIC AND HOUSING ESTIMATES" table, id = DP05. Variables were selected to isolate the hispanic population in our sample. This was done so that the race percentages would add up to 100%.
 
-```{r}
+```{r, include = FALSE}
 #2016
 
 demography_2016<- read.csv("./ACS_Data/ACS_16_5YR_DP05_with_ann.csv")
@@ -198,7 +198,7 @@ saveRDS(education, file = "./R Objects/education_attainment.RDS")
 The data for education information came from the ACS "Selected Economic Characteristics-5 year estimates" table, id =  DP03. Nothing was really changed besides adding a percentage sign. 
 
 
-```{r}
+```{r, include=FALSE}
 #2016
 
 insurance_2016<- read.csv("./ACS_Data/ACS_16_5YR_DP03_with_ann.csv")
@@ -722,6 +722,9 @@ icarol_2016 <- filter(icarol_2016, zip_code
 icarol_2016 <- filter(icarol_2016, call_type != "Transfer")
 icarol_2016 <- filter(icarol_2016, call_type != "Disconnect")
 icarol_2016 <- select(icarol_2016, age, zip_code, gender, preferred_language, military_branch, military_status, need_name)
+icarol_2016 <- filter(icarol_2016, age != "N/A")
+icarol_2016 <- filter(icarol_2016, age != "Refused")
+icarol_2016$age <- na.omit(icarol_2016$age)
 
 #reassigning age into bins
 for (i in 1:length(icarol_2016$age)){
@@ -782,12 +785,12 @@ icarol_2017 <- filter(icarol_2017, call_type != "Transfer")
 icarol_2017 <- filter(icarol_2017, call_type != "Disconnect")
 icarol_2017 <- select(icarol_2017, age, zip_code, gender, preferred_language, 
                       military_branch, military_status, need_name)
+icarol_2017 <- filter(icarol_2017, age != "N/A")
+icarol_2017 <- filter(icarol_2017, age != "Refused")
+icarol_2017$age <- na.omit(icarol_2017$age)
 
 for (i in 1:length(icarol_2017$age)){
-  if(icarol_2017$age[i] <= 12){        
-    icarol_2017$age[i] <- "Children (0-12)"               
-  }
-  else if(icarol_2017$age[i] >= 13 & icarol_2017$age[i] < 18){        
+  if(icarol_2017$age[i] >= 13 & icarol_2017$age[i] < 18){        
     icarol_2017$age[i] <- "Teens (13-18)"              
   }
   else if(icarol_2017$age[i] >= 18 & icarol_2017$age[i] <=  24){        
