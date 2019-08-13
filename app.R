@@ -123,7 +123,7 @@ sidebar <- dashboardSidebar(
                       value= as.Date("2016-01-01"),
                       timeFormat= "%Y",
                       step = 365,
-                      )),
+                      animate = animationOptions(interval = 1000))),
       div(id = "BoxIndicator",
           selectInput(
             inputId = "indicator",
