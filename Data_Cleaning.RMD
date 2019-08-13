@@ -19,9 +19,22 @@ library(readr) #necessary for reading in files.
 
 
 
-#General Data Notes
+# General Data Notes
 
 Most was obtained using American Factfinder. The geography selected was the "5-Digit ZIP code Tabulation Area". If you click the "5-Digit Zip Code" option you will not find the same results. 
+
+## Updating additional years to the shiny app
+The first thing you need to do is click the R Project file entitled "UWATX_Shiny_App". This ensure that you are using the right directory. Next you need to download the new files. Above each code chuck I've put the information you need to find them. ACS data should be downloaded and unzipped into the "ACS Data" folder, and the 211 data should be added to the "211 Data" folder. The ACS data is consistently named the same way, however, the file name for the 211 data seems to change every year, so you need to make sure you input it correctly. 
+
+Once the new files are downloaded, it's time to make code edits. Included in each code chuck is sections denoted by "#2016". All you have to do is copy and paste the entire section and simply change the dates througout. Make sure you change the ACS file names as well. For example, "./ACS_Data/ACS_17_5YR_DP05_with_ann.csv" would need to be changed to "./ACS_Data/ACS_18_5YR_DP05_with_ann.csv" when you add the data from 2018. In most of the code chucks there is also a section that binds the years together into one data table, such as #binding rows in the first chuck. Here all you need to do is include the new year. 
+
+For example:
+
+demography <- bind_rows(demography_2016, demography_2017) 
+
+Changes to:
+
+demography <- bind_rows(demography_2016, demography_2017, demography_2018)
 
 ## Demographic Information 
 
@@ -32,7 +45,7 @@ The data for demographic information came from the "ACS DEMOGRAPHIC AND HOUSING 
 
 demography_2016<- read.csv("./ACS_Data/ACS_16_5YR_DP05_with_ann.csv")
 
-#data cleaning 
+
 names(demography_2016) <- as.matrix(demography_2016[1, ])
 demography_2016 <- demography_2016[-1, ]
 demography_2016 <- clean_names(demography_2016)
@@ -61,7 +74,7 @@ demography_2016 <- rename(demography_2016, percent_hispanic = percent_hispanic_o
                           ,percent_asian_alone = percent_hispanic_or_latino_and_race_total_population_not_hispanic_or_latino_asian_alone
 )
 
-#setting the date 
+
 date2016 <- ymd(20160101)
 demography_2016 <- mutate(demography_2016, date = date2016)
 
@@ -141,7 +154,7 @@ education_2016 <- mutate(education_2016, less_than_highschool = rowSums(educatio
                            estimate_total_doctorate_degree)
 education_2016 <- education_2016[,-(3:26)]
 
-#setting the date 
+
 year2016 <- ymd(20160101)
 education_2016 <- mutate(education_2016, date = year2016) 
 
@@ -170,7 +183,7 @@ education_2017 <- mutate(education_2017, less_than_highschool = rowSums(educatio
                            estimate_total_doctorate_degree)
 education_2017 <- education_2017[,-(3:26)]
 
-#setting the date 
+
 year2017 <- ymd(20170101)
 education_2017 <- mutate(education_2017, date = year2017)  
 
@@ -284,7 +297,7 @@ housing_units_2016 <- filter(housing_units_2016, zipcode %in% c( 78705,78617,786
                                                                  ,78746,78747,78748,78749,78750,78751,78752,78753
                                                                  ,78754,78756,78757,78758,78759,78654,78610,78621
                                                                  ,78615,78669,78737,78620,78726)) #78712 is excluded,represents UT
-#setting the date 
+
 year2016 <- ymd(20160101)
 housing_units_2016 <- mutate(housing_units_2016, date = year2016)  
 
@@ -302,7 +315,7 @@ housing_units_2017 <- filter(housing_units_2017, zipcode %in% c( 78705,78617,786
                                                                  ,78746,78747,78748,78749,78750,78751,78752,78753
                                                                  ,78754,78756,78757,78758,78759,78654,78610,78621
                                                                  ,78615,78669,78737,78620,78726)) #78712 is excluded,represents UT 
-#setting the date 
+ 
 year2017 <- ymd(20170101)
 housing_units_2017 <- mutate(housing_units_2017, date = year2017)  
 
@@ -517,13 +530,11 @@ poverty_status_2016 <- filter(poverty_status_2016, zipcode %in% c( 78705,78617,7
 year2016 <- ymd(20160101)
 poverty_status_2016 <- mutate(poverty_status_2016, date = year2016)  
 
-#2017pulling the csv file into the global environment
+#2017
 poverty_status_2017 <- read.csv("./ACS_Data/ACS_17_5YR_S1701_with_ann.csv")
-
-#2017selecting meaningful columns
 poverty_status_2017 <- select(poverty_status_2017, GEO.id2, HC03_EST_VC01)
 
-#2017renaming column headers and filtering for Travis country zipcodes
+
 poverty_status_2017 <- rename(poverty_status_2017, zipcode = GEO.id2, percent_below_poverty_level = HC03_EST_VC01)
 poverty_status_2017 <- poverty_status_2017[2:1947,]
 poverty_status_2017 <- mutate(poverty_status_2017, zipcode = as.numeric(as.character(zipcode)), 
@@ -535,7 +546,7 @@ poverty_status_2017 <- filter(poverty_status_2017, zipcode %in% c(78705,78617,78
                                                                   ,78746,78747,78748,78749,78750,78751,78752,78753
                                                                   ,78754,78756,78757,78758,78759,78654,78610,78621
                                                                   ,78615,78669,78737,78620,78726)) #78712 is excluded,represents UT 
-#2017Adding a column for year 
+
 year2017 <- ymd(20170101)
 poverty_status_2017 <- mutate(poverty_status_2017, date = year2017) 
         
@@ -706,8 +717,6 @@ The UW icarol file was used to ocreate the treemap master. This document shows e
 
 #2016
 icarol_2016 <- openxlsx::read.xlsx("./211 Data/2016 CNT iCarol Export.xlsx", sheet = 1, startRow = 1, colNames = TRUE)
-
-#2016renaming column headers and filtering for Travis country zipcodes
 icarol_2016 <- clean_names(icarol_2016)
 
 icarol_2016 <- filter(icarol_2016, zip_code
@@ -726,37 +735,37 @@ icarol_2016 <- filter(icarol_2016, age != "N/A")
 icarol_2016 <- filter(icarol_2016, age != "Refused")
 icarol_2016$age <- na.omit(icarol_2016$age)
 
-#reassigning age into bins
+
 for (i in 1:length(icarol_2016$age)){
-  if(icarol_2016$age[i] <= 12){        
-    icarol_2016$age[i] <- "Children (0-12)"               
-  }
-  else if(icarol_2016$age[i] >= 13 & icarol_2016$age[i] < 18){        
-    icarol_2016$age[i] <- "Teens (13-18)"              
-  }
-  else if(icarol_2016$age[i] >= 18 & icarol_2016$age[i] <=  24){        
-    icarol_2016$age[i] <- "Adults (18-24)"              
-  }
-  else if(icarol_2016$age[i] >= 25 & icarol_2016$age[i] <=  34){        
-    icarol_2016$age[i] <- "Adults (25-34)"              
-  }
-  else if(icarol_2016$age[i] >= 35 & icarol_2016$age[i] <=  44){        
-    icarol_2016$age[i] <- "Adults (35-44)"  
-  }
-  else if(icarol_2016$age[i] >= 45 & icarol_2016$age[i] <=  54){        
-    icarol_2016$age[i] <- "Adults (45-54)"              
-  }
-  else if(icarol_2016$age[i] >= 55 & icarol_2016$age[i] <=  64){        
-    icarol_2016$age[i] <- "Adults (55-64)"              
-  }
-  else if(icarol_2016$age[i] >= 65 & icarol_2016$age[i] <=  74){        
-    icarol_2016$age[i] <- "Adults (65-74)"              
-  }
-  else if(icarol_2016$age[i] >= 75){        
-    icarol_2016$age[i] <- "Adults (75+)"              
-  }
+                  if(icarol_2016$age[i] <= 12){        
+                    icarol_2016$age[i] <- "Children (0-12)"               
+                  }
+                  else if(icarol_2016$age[i] >= 13 & icarol_2016$age[i] < 18){        
+                    icarol_2016$age[i] <- "Teens (13-18)"              
+                  }
+                  else if(icarol_2016$age[i] >= 18 & icarol_2016$age[i] <=  24){        
+                    icarol_2016$age[i] <- "Adults (18-24)"              
+                  }
+                  else if(icarol_2016$age[i] >= 25 & icarol_2016$age[i] <=  34){        
+                    icarol_2016$age[i] <- "Adults (25-34)"              
+                  }
+                  else if(icarol_2016$age[i] >= 35 & icarol_2016$age[i] <=  44){        
+                    icarol_2016$age[i] <- "Adults (35-44)"  
+                  }
+                  else if(icarol_2016$age[i] >= 45 & icarol_2016$age[i] <=  54){        
+                    icarol_2016$age[i] <- "Adults (45-54)"              
+                  }
+                  else if(icarol_2016$age[i] >= 55 & icarol_2016$age[i] <=  64){        
+                    icarol_2016$age[i] <- "Adults (55-64)"              
+                  }
+                  else if(icarol_2016$age[i] >= 65 & icarol_2016$age[i] <=  74){        
+                    icarol_2016$age[i] <- "Adults (65-74)"              
+                  }
+                  else if(icarol_2016$age[i] >= 75){        
+                    icarol_2016$age[i] <- "Adults (75+)"              
+                  }
 }
-#adding count variable and year 
+
 icarol_2016 <- mutate(icarol_2016, count = 1)
 
 date2016 <- ymd(20160101)
@@ -790,30 +799,30 @@ icarol_2017 <- filter(icarol_2017, age != "Refused")
 icarol_2017$age <- na.omit(icarol_2017$age)
 
 for (i in 1:length(icarol_2017$age)){
-  if(icarol_2017$age[i] >= 13 & icarol_2017$age[i] < 18){        
-    icarol_2017$age[i] <- "Teens (13-18)"              
-  }
-  else if(icarol_2017$age[i] >= 18 & icarol_2017$age[i] <=  24){        
-    icarol_2017$age[i] <- "Adults (18-24)"              
-  }
-  else if(icarol_2017$age[i] >= 25 & icarol_2017$age[i] <=  34){        
-    icarol_2017$age[i] <- "Adults (25-34)"              
-  }
-  else if(icarol_2017$age[i] >= 35 & icarol_2017$age[i] <=  44){        
-    icarol_2017$age[i] <- "Adults (35-44)"  
-  }
-  else if(icarol_2017$age[i] >= 45 & icarol_2017$age[i] <=  54){        
-    icarol_2017$age[i] <- "Adults (45-54)"              
-  }
-  else if(icarol_2017$age[i] >= 55 & icarol_2017$age[i] <=  64){        
-    icarol_2017$age[i] <- "Adults (55-64)"              
-  }
-  else if(icarol_2017$age[i] >= 65 & icarol_2017$age[i] <=  74){        
-    icarol_2017$age[i] <- "Adults (65-74)"              
-  }
-  else if(icarol_2017$age[i] >= 75){        
-    icarol_2017$age[i] <- "Adults (75+)"              
-  }
+                  if(icarol_2017$age[i] >= 13 & icarol_2017$age[i] < 18){        
+                    icarol_2017$age[i] <- "Teens (13-18)"              
+                  }
+                  else if(icarol_2017$age[i] >= 18 & icarol_2017$age[i] <=  24){        
+                    icarol_2017$age[i] <- "Adults (18-24)"              
+                  }
+                  else if(icarol_2017$age[i] >= 25 & icarol_2017$age[i] <=  34){        
+                    icarol_2017$age[i] <- "Adults (25-34)"              
+                  }
+                  else if(icarol_2017$age[i] >= 35 & icarol_2017$age[i] <=  44){        
+                    icarol_2017$age[i] <- "Adults (35-44)"  
+                  }
+                  else if(icarol_2017$age[i] >= 45 & icarol_2017$age[i] <=  54){        
+                    icarol_2017$age[i] <- "Adults (45-54)"              
+                  }
+                  else if(icarol_2017$age[i] >= 55 & icarol_2017$age[i] <=  64){        
+                    icarol_2017$age[i] <- "Adults (55-64)"              
+                  }
+                  else if(icarol_2017$age[i] >= 65 & icarol_2017$age[i] <=  74){        
+                    icarol_2017$age[i] <- "Adults (65-74)"              
+                  }
+                  else if(icarol_2017$age[i] >= 75){        
+                    icarol_2017$age[i] <- "Adults (75+)"              
+                  }
 }
 icarol_2017 <- mutate(icarol_2017, count = 1)
 
@@ -827,19 +836,19 @@ treemap_master17<- select(icarol_2017, Year, zipcode, age, gender, preferred_lan
 treemap_master <- bind_rows(treemap_master16, treemap_master17)
 
 for (i in 1:length(treemap_master$military_branch)){
-  if(is.na(treemap_master$military_branch[i])){        
-    treemap_master$military_branch <- "Undetermined"               
-  }
+                  if(is.na(treemap_master$military_branch[i])){        
+                    treemap_master$military_branch <- "Undetermined"               
+                  }
 }
 
 
 for (i in 1:length(treemap_master$military_status)){
-  if(is.na(treemap_master$military_status[i])){        
-    treemap_master$military_status[i] <- "Undetermined"               
-  }
-  else if(treemap_master$military_status[i] == "Did Not Ask"){        
-    treemap_master$military_status[i] <- "Undetermined"              
-  }
+                  if(is.na(treemap_master$military_status[i])){        
+                    treemap_master$military_status[i] <- "Undetermined"               
+                  }
+                  else if(treemap_master$military_status[i] == "Did Not Ask"){        
+                    treemap_master$military_status[i] <- "Undetermined"              
+                  }
 }
 
 saveRDS(treemap_master, file = "./R Objects/treemap_master.RDS")
@@ -856,7 +865,6 @@ The UW icarol file was used to ocreate the treemap master.This r objects shows t
 icarol_2016 <- openxlsx::read.xlsx("./211 Data/2016 CNT iCarol Export.xlsx", 
                                    sheet = 1, startRow = 1, colNames = TRUE)
 
-#2016renaming column headers and filtering for Travis country zipcodes
 icarol_2016 <- clean_names(icarol_2016)
 
 icarol_2016 <- filter(icarol_2016, zip_code
@@ -871,11 +879,8 @@ icarol_2016 <- filter(icarol_2016, zip_code
 icarol_2016 <- filter(icarol_2016, call_type != "Transfer")
 icarol_2016 <- filter(icarol_2016, call_type != "Disconnect")
 
-#group by need name 
-
 needs_zip_treemap16 <- icarol_2016 %>% group_by(zip_code, need_name) %>% tally()
 
-#reformat data 
 
 needs_zip_treemap16 <- rename(needs_zip_treemap16, zipcode = zip_code, value = n)
 needs_zip_treemap16 <- mutate(needs_zip_treemap16, Year = 2016)
@@ -927,9 +932,10 @@ saveRDS(needs_zip_treemap, file = "./R Objects/needs_zip_treemap.RDS")
 The UW icarol file was used to create the total 211 calls table. In addition, the data for housing units was used to calculate the total calls per 100 households. Calls that were transfered or disconnected were removed, and the data was groups by zipcode and year. The number of digits was also reduced to two. 
 
 ```{R}
+
+#2016
 icarol_2016 <- openxlsx::read.xlsx("./211 Data/2016 CNT iCarol Export.xlsx", sheet = 1, startRow = 1, colNames = TRUE)
 
-#2016renaming column headers and filtering for Travis country zipcodes
 icarol_2016 <- clean_names(icarol_2016)
 
 icarol_2016 <- filter(icarol_2016, zip_code
@@ -946,8 +952,6 @@ icarol_2016 <- filter(icarol_2016, call_type != "Disconnect")
 date2016 <- ymd(20160101)
 icarol_2016 <- mutate(icarol_2016, date = date2016)
 
-
-#2016Computing the total number of calls per zipcode along with per 100 households 
 calls2016 <- distinct(icarol_2016, call_report_number, .keep_all =  TRUE)
 calls2016 <- calls2016 %>% group_by(zip_code) %>% summarise(total_calls = n())
 total_housing_units <- read_rds("./R Objects/total_housing_units.RDS")
