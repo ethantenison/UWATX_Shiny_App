@@ -247,8 +247,9 @@ body <- dashboardBody(
                                            selectInput("category", "Select A Profile Category:",
                                                        choices = c("Demographics" = "Race",
                                                                    "Insurance Coverage" = "Insurance",
-                                                                   "Poverty" = "Financial",
-                                                                   "Education" = "Education"),
+                                                                   #"Income & Poverty" = "Income & Poverty",
+                                                                   "Education" = "Education",
+                                                                   "Age" = "Age"),
                                                        selected = "Race"),
                                            # data.hint = "Use this to explore different population topics. For instance, the Demographics category tells us the breakdown of different demographic populations living in a given zip code."
                                            
@@ -707,6 +708,7 @@ server <- function (input, output, session) {
         as.data.frame()
       
       paste0("Is This Indicator 'Normal' in ", m$zipcode, "?")
+      paste0("The dot represents where ", m$zipcode , " lies on the citywide distribution ")
     })
     
     output$zipboxprofile <- renderText({
@@ -747,7 +749,7 @@ server <- function (input, output, session) {
       
       valueBox(
         paste0(travis_calls$value), paste0("Total Calls ",  "(Rank: ", travis_calls$rank,")"), icon = icon("phone"),
-        color = "yellow"
+        color = "blue"
       )
     })
     
@@ -762,7 +764,7 @@ server <- function (input, output, session) {
       
       valueBox(
         paste0(round(travis_callshh$value, 1)), paste0("Calls Per 100 HHs ", "(Rank: ", travis_callshh$rank,")"), icon = icon("phone-volume"),
-        color = "red"
+        color = "blue"
       )
     })
     
@@ -795,7 +797,7 @@ server <- function (input, output, session) {
       
       valueBox(
         paste0(travis_hh$value), paste0("Total Households ", "(Rank: ", travis_hh$rank,")"), icon = icon("home"),
-        color = "light-blue"
+        color = "blue"
       )
     })
     
@@ -898,7 +900,7 @@ server <- function (input, output, session) {
       hcboxplot(x = travis_chart$value, 
                 var = travis_chart$measures, animation = FALSE) %>%
         hc_add_series_scatter(x = 0, y =  round(m$value, 2), name = m$zipcode, color = "#5da5da", animation = FALSE) %>%
-        hc_yAxis(labels = list(format = "{value}%")) %>%
+        hc_yAxis(labels = list(format = "{value}")) %>%
         hc_add_theme(
           hc_theme_merge(
             hc_theme_tufte(),
