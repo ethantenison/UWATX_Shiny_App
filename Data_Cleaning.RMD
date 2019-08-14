@@ -5,7 +5,7 @@ date: "8/11/2019"
 output: html_document
 ---
 
-```{r libraries}
+```{r libraries, error=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse) 
 library(dplyr) #data manipulation
@@ -20,12 +20,14 @@ library(readr) #necessary for reading in files.
 
 
 # General Data Notes
-Most was obtained using American Factfinder. The geography selected was the "5-Digit ZIP code Tabulation Area". If you click the "5-Digit Zip Code" option you will not find the same results. I recommend using the "Data_Cleaning.RMD" file to make alterations to the app. This file type will allow you to run one chuck of code at a time, and it will tell you where you are experiencing errors. 
+Most of the dataq was obtained using American Factfinder. The geography selected was the "5-Digit ZIP code Tabulation Area". If you click the "5-Digit Zip Code" option you will not find the same results. I recommend using the "Data_Cleaning.RMD" file to make alterations to the app. This file type will allow you to run one chuck of code at a time, and it will tell you where you are experiencing errors. 
 
 ## Updating additional years to the shiny app
 The first thing you need to do is click the R Project file entitled "UWATX_Shiny_App". This ensure that you are using the right directory. Next you need to download the new files. Above each code chuck I've put the information you need to find them. ACS data should be downloaded and unzipped into the "ACS Data" folder, and the 211 data should be added to the "211 Data" folder. The ACS data is consistently named the same way, however, the file name for the 211 data seems to change every year, so you need to make sure you input it correctly. 
 
 Once the new files are downloaded, it's time to make code edits. Included in each code chuck is sections denoted by "#2016". All you have to do is copy and paste the entire section and simply change the dates througout. Make sure you change the ACS file names as well. For example, "./ACS_Data/ACS_17_5YR_DP05_with_ann.csv" would need to be changed to "./ACS_Data/ACS_18_5YR_DP05_with_ann.csv" when you add the data from 2018. In most of the code chucks there is also a section that binds the years together into one data table, such as #binding rows in the first chuck. Here all you need to do is include the new year. 
+
+Whenever you make a change to one code chuck, if you want it to show up in the app, you need run the code for data_4_download followed by data_4_analysis before you go to the app.R script. 
 
 For example:
 
@@ -39,7 +41,7 @@ demography <- bind_rows(demography_2016, demography_2017, demography_2018)
 
 The data for demographic information came from the "ACS DEMOGRAPHIC AND HOUSING ESTIMATES" table, id = DP05. Variables were selected to isolate the hispanic population in our sample. This was done so that the race percentages would add up to 100%.
 
-```{r}
+```{r, error=FALSE}
 #2016
 
 demography_2016<- read.csv("./ACS_Data/ACS_16_5YR_DP05_with_ann.csv")
@@ -127,7 +129,7 @@ saveRDS(demography, file = "./R Objects/demographics.RDS")
 
 The data for education information came from the ACS "EDUCATIONAL ATTAINMENT FOR THE POPULATION 25 YEARS AND OVER" table, id = B15003. Some of the columns were added together in order to create appropriate categories. For example, "high school diploma" and "GED" were added together to create "high school & GED". In addition, "associates degree" and "some college" were lumped together, and higher education was collapsed into one "bachelors plus" column. Finally, they were converted into percentages.  
 
-```{r}
+```{r,error=FALSE}
 #2016
 education_2016<- read.csv("./ACS_Data/ACS_16_5YR_B15003_with_ann.csv")
 education_2016 <- select(education_2016, GEO.id2, starts_with("HD01"))
@@ -210,7 +212,7 @@ saveRDS(education, file = "./R Objects/education_attainment.RDS")
 The data for education information came from the ACS "Selected Economic Characteristics-5 year estimates" table, id =  DP03. Nothing was really changed besides adding a percentage sign. 
 
 
-```{r}
+```{r, error=FALSE}
 #2016
 
 insurance_2016<- read.csv("./ACS_Data/ACS_16_5YR_DP03_with_ann.csv")
@@ -281,7 +283,7 @@ saveRDS(insurance, file = "./R Objects/health_insurance.RDS")
 
 The data for housing information came from the ACS "SELECTED HOUSING CHARACTERISTICS-5 year estimate" table, id =  DP04. The values were unchanged. 
 
-```{r}
+```{r, error=FALSE}
 #2016
 housing_units_2016<- read.csv("./ACS_Data/ACS_16_5YR_DP04_with_ann.csv")
 housing_units_2016 <- select(housing_units_2016, GEO.id2, HC01_VC03)
@@ -330,7 +332,7 @@ saveRDS(housing_units, file = "./R Objects/total_housing_units.RDS")
 
 The data for rent came from the ACS "Gross Median Rent - 5 year estimate" table, id =  B25064. These values remain unchagned. 
 
-```{r}
+```{r, error=FALSE}
 #2016
 
 medianRent_2016<- read.csv("./ACS_Data/ACS_16_5YR_B25064_with_ann.csv")
@@ -391,7 +393,7 @@ saveRDS(medianRent, file = "./R Objects/median_rent.RDS")
 
 The data for home values came from the ACS "SELECTED HOUSING CHARACTERISTICS-5 year estimate" table, id = DP04.
 
-```{r}
+```{r, error=FALSE}
 
 #2016
 housing_median_price_2016<- read.csv("./ACS_Data/ACS_16_5YR_DP04_with_ann.csv")
@@ -441,7 +443,7 @@ saveRDS(housing_median_price, file = "./R Objects/median_housing_price.RDS")
 The data for education information came from the ACS "MEDIAN FAMILY INCOME IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS) BY FAMILY TYPE BY PRESENCE OF OWN CHILDREN UNDER 18 YEARS" table, id = B19126. The values are unchanged from the original. 
 
 
-```{r}
+```{r, error=FALSE}
 #2016
 
 median_income_family_2016<- read.csv("./ACS_Data/ACS_16_5YR_B19126_with_ann.csv")
@@ -499,6 +501,9 @@ median_income_family_2017 <- mutate(median_income_family_2017, date = year2017)
 
 #binding rows
 median_income_family <- bind_rows(median_income_family_2016, median_income_family_2017)
+median_income_family <- median_income_family %>% mutate(median_monthly_family_income = (median_family_income)/12) %>% select(zipcode, median_family_income, median_monthly_family_income, date)
+
+median_income_family$median_monthly_family_income<- format(median_income_family$median_monthly_family_income, digits=2, nsmall=0)
 
 #saving data 
 saveRDS(median_income_family, file = "./R Objects/median_family_income.RDS")
@@ -510,7 +515,7 @@ saveRDS(median_income_family, file = "./R Objects/median_family_income.RDS")
 
 The data for home values came from the ACS " POVERTY STATUS IN THE PAST 12 MONTHS-5 year estimate" table, id = S1701. The values remain unchanged. 
 
-```{r}
+```{r, error=FALSE}
 #2016
 poverty_status_2016 <- read.csv("./ACS_Data/ACS_16_5YR_S1701_with_ann.csv")
 poverty_status_2016 <- select(poverty_status_2016, GEO.id2, HC03_EST_VC01)
@@ -564,7 +569,7 @@ poverty_status_2017 <- mutate(poverty_status_2017, date = year2017)
 
 The data for 60 and above came from the ACS "AGE AND SEX" table, id = S0101. The values remain unchanged. 
 
-```{r}
+```{r, error=FALSE}
  #2016
         over60_2016<- read.csv("./ACS_Data/ACS_16_5YR_S0101_with_ann.csv")
         over60_2016 <- select(over60_2016, GEO.id2, HC02_EST_VC31)
@@ -613,7 +618,7 @@ saveRDS(over60, file = "./R Objects/over60.RDS")
 
 The data for under 6 came from the ACS " POPULATION UNDER 18 YEARS BY AGE" table, id = B09001, and from "TOTAL POPULATION", id = B01003. You need both of these data sets in order for this to run. Using "TOTAL POPULATION", a column was added denoting the percentage of children under 6 in each zip code.  
 
-```{R}
+```{R, error=FALSE}
 
 #2016
 under6_2016<- read.csv("./ACS_Data/ACS_16_5YR_B09001_with_ann.csv") 
@@ -712,7 +717,7 @@ saveRDS(under6, file = "./R Objects/under6.RDS")
 
 The UW icarol file was used to ocreate the treemap master. This document shows every single 211 referral along with year,zip, age, gender, language, military status, and the name of the need. Calls that were transfered or disconnected were removed. Age has been changed to reflect discrete categories, such as 13-18 year olds and 60 and up. In addition, veterans who did not report military status was changed to "undetermined".
 
-```{R}
+```{R, error=FALSE}
 
 #2016
 icarol_2016 <- openxlsx::read.xlsx("./211 Data/2016 CNT iCarol Export.xlsx", sheet = 1, startRow = 1, colNames = TRUE)
@@ -857,7 +862,7 @@ saveRDS(treemap_master, file = "./R Objects/treemap_master.RDS")
 ## Needs Zip treemap 
 
 The UW icarol file was used to ocreate the treemap master.This r objects shows the sum of every type of referral by year, zipcode, and needs category. Calls that were transfered or disconnected were removed. Then the data was grouped by zip code and the need name. Finally, the total calls per need were tallied. NA values were removed and any need that had less than 5 calls was as well. 
-```{R}
+```{R, error=FALSE}
 
 
 #2016
@@ -930,7 +935,7 @@ saveRDS(needs_zip_treemap, file = "./R Objects/needs_zip_treemap.RDS")
 
 The UW icarol file was used to create the total 211 calls table. In addition, the data for housing units was used to calculate the total calls per 100 households. Calls that were transfered or disconnected were removed, and the data was groups by zipcode and year. The number of digits was also reduced to two. 
 
-```{R}
+```{R, error=FALSE}
 
 #2016
 icarol_2016 <- openxlsx::read.xlsx("./211 Data/2016 CNT iCarol Export.xlsx", sheet = 1, startRow = 1, colNames = TRUE)
@@ -1003,7 +1008,7 @@ saveRDS(total_211_calls, file = "./R Objects/total_211_calls.RDS")
 
 This r object uses most of the tables created above. The data was joined using the zip code and then the date. In the Shiny app, viewers can download the selected data that appears on the map. 
 
-```{R}
+```{R, error=FALSE}
 #Reading the existing data 
 demographics <- read_rds("./R Objects/demographics.RDS")
 education_attainment <- read_rds("./R Objects/education_attainment.RDS")
@@ -1041,7 +1046,7 @@ saveRDS(data_4_download, file = "./R Objects/data_4_download.RDS")
 ## Total 211 Referrals 
 
 This R object used the data_4_download object to sum up the total referrals per zip code, irrespective of the need name. This information appears in the static section of the Shiny app.
-```{r}
+```{r, error=FALSE}
 data <- read_rds("./R Objects/data_4_download.RDS")
 
 summ211data <- data %>% group_by(Year) %>% summarise(total_referrals = sum(total_calls))
@@ -1058,32 +1063,32 @@ Finally the spatial data is joined using the zip codes. You can find the shape f
 
 Click on the Shape file zip download. 
 
-```{R}
+```{R, error=FALSE}
 #reading the existing data 
 data <- read_rds("./R Objects/data_4_download.RDS")
 
-convert_columns <- colnames(data[3:24])
+convert_columns <- colnames(data[3:25]) #If you add a variable you need to change the number of columns and you also need to change new.row.names
 
 data_4_analysis <- reshape(data, idvar = c("Year", "zipcode"), varying = c(convert_columns),
-                          v.name = c("value"), times = c(convert_columns),
-                          new.row.names = 1:2332, direction = "long")
+                          v.name = c("value"), times = c(convert_columns), new.row.names = 1:2438,
+                           direction = "long") 
 
 data_4_analysis <- rename(data_4_analysis, measure = time)
 
 data_4_analysis <- mutate(data_4_analysis, displayed_measure = recode(data_4_analysis$measure, 
                           total_calls = "Total 211 Calls", calls_per100HH = "211 Calls per 100 Households",
-                          percent_hispanic = "Hispanic", percent_white_alone = "White", 
-                          percent_black_alone = "Black", percent_asian_alone = "Asian",
-                          percent_less_than_highschool = "Less than HS", percent_highschool_GED=
-                          "HS Diploma or GED", percent_associates_somecollege = "Associates Degree",
-                          percent_bachelors_plus = "Bachelor's and Higher", percent_with_insurance =
-                          "Insurance", percent_with_private_insurance = "Private Insurance", 
-                          percent_with_public_insurance = "Public Insurance", 
-                          percent_with_no_insurance= "No Insurance", median_family_income 
-                          = "Median Family Income", housing_median_price = "Median Household Value", 
-                          estimate_median_gross_rent = "Median Rent", percent_over60 = "Over 60",
+                          percent_hispanic = "Hispanic (%)", percent_white_alone = "White (%)", 
+                          percent_black_alone = "Black (%)", percent_asian_alone = "Asian (%)",
+                          percent_less_than_highschool = "Less than HS (%)", percent_highschool_GED=
+                          "HS Diploma or GED (%)", percent_associates_somecollege = "Associates Degree or some College (%)",
+                          percent_bachelors_plus = "Bachelor's and Higher (%)", percent_with_insurance =
+                          "Insurance (%)", percent_with_private_insurance = "Private Insurance (%)", 
+                          percent_with_public_insurance = "Public Insurance (%)", 
+                          percent_with_no_insurance= "No Insurance (%)", median_family_income 
+                          = "Median Family Income", median_monthly_family_income = "Median Monthly Family Income", housing_median_price = "Median Household Value", 
+                          estimate_median_gross_rent = "Median Rent", percent_over60 = "Over 60 (%)",
                           children_under6 = "Total Children Under 6", percent_below_poverty_level = 
-                          "Poverty 100%", 	percent_under6 = "Under 6", housing_units = "Households"
+                          "Poverty 100%", 	percent_under6 = "Under 6 (%)", housing_units = "Households"
                                           )
                           )
 
@@ -1097,9 +1102,9 @@ data_4_analysis <- mutate(data_4_analysis, category = recode(data_4_analysis$mea
                             "Insurance", percent_with_private_insurance = "Insurance", 
                           percent_with_public_insurance = "Insurance", 
                           percent_with_no_insurance= "Insurance", median_family_income 
-                          = "Financial", housing_median_price = "Financial", 
-                          estimate_median_gross_rent = "Financial", percent_over60 = "Age",
-                          children_under6 = "Age", percent_below_poverty_level = 
+                          = "Financial", median_monthly_family_income = "Income & Poverty", housing_median_price = "Households", 
+                          estimate_median_gross_rent = "Income & Poverty", percent_over60 = "Age",
+                          children_under6 = "Total Age", percent_below_poverty_level = 
                             "Financial", 	percent_under6 = "Age", housing_units = "Households"
                                           )
                           )
