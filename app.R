@@ -101,10 +101,6 @@ header <- dashboardHeader(title = tags$a(href='http://www.unitedwayaustin.org',
                                          'City Dashboard')
 )
 
-# header <- dashboardHeader(
-#   # disable = TRUE
-#   title = "211 City Explorer"
-# )
 
 sidebar <- dashboardSidebar(
   useShinyjs(),
@@ -211,7 +207,9 @@ body <- dashboardBody(
     tags$link(rel = "stylesheet", type = "text/css", href = "custom.css"),
     tags$link(rel = "stylesheet", type = "text/css", href = "selectizebootstrap.css"),
     tags$link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.1.0/css/all.css", integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt", crossorigin="anonymous"),
-    tags$script(src = "wordwrap.js")
+    tags$script(src = "wordwrap.js"),
+    tags$style(".small-box.bg-blue { background-color: #005291 !important; color: #005291 !important; }"),
+    tags$style(".small-box.bg-light-blue { background-color: #539ed0 !important; color: #539ed0 !important; }")
   ),
   tabItems(
     tabItem(tabName = "community",
@@ -899,7 +897,7 @@ server <- function (input, output, session) {
       
       hcboxplot(x = travis_chart$value, 
                 var = travis_chart$measures, animation = FALSE) %>%
-        hc_add_series_scatter(x = 0, y =  round(m$value, 2), name = m$zipcode, color = "#5da5da", animation = FALSE) %>%
+        hc_add_series_scatter(x = 0, y =  round(m$value, 2), name = m$zipcode, color = "#539ed0", animation = FALSE) %>%
         hc_yAxis(labels = list(format = "{value}")) %>%
         hc_add_theme(
           hc_theme_merge(
