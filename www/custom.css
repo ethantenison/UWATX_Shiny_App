@@ -70,7 +70,7 @@
 	-webkit-tap-highlight-color: transparent;
 }
 .leaflet-container a {
-	-webkit-tap-highlight-color: rgba(51, 181, 229, 0.4);
+	-webkit-tap-highlight-color: rgba(83, 158, 208, 0.4);
 }
 .leaflet-tile {
 	filter: inherit;
@@ -685,11 +685,11 @@
 box-sizing: content-box;
 width: 10px;
 height: 10px;
-border: 5px solid rgba(41, 135, 123, 0.35);
+border: 5px solid rgba(0, 81, 145, 0.35);
 -webkit-border-radius: 30px;
 -moz-border-radius: 30px;
 border-radius: 30px;
-background-color: rgba(65, 214, 195, 0.53);
+background-color: rgba(83, 158, 208, 0.53);
 z-index: 10;
 position: absolute;
 -webkit-transition: all .2s ease-out;
@@ -797,7 +797,7 @@ padding-left: 4px;
 }
 
 .skin-blue .main-header .navbar {
-background-color: #3d70b2;
+background-color: #005191;
 }
 
 .slider-animate-container {
@@ -807,20 +807,20 @@ margin-top: 0px;
 
 .skin-blue .main-header .logo {
 	background-color: #f4f7fb;
-	color: #152934;
+	color: #005291;
 	/* text-transform: uppercase; */
 	border-bottom: 0 solid transparent;
 }
 
 .skin-blue .main-header .logo:hover {
 	background-color: #dfe3e6;
-	color: #152934;
+	color: #005291;
 	border-bottom: 0 solid transparent;
 }
 
 .skin-blue .main-header .navbar .sidebar-toggle {
 	color: #fffff;
-	background: #3d70b2;
+	background: #005291;
 }
 
 .skin-blue .main-header .navbar .sidebar-toggle:hover {
@@ -855,8 +855,8 @@ padding: 6px;
 
 .box.box-solid.box-info>.box-header {
 color: #fff;
-background: #00c0ef;
-background-color: #00c0ef;
+background: #539ed0;
+background-color: #539ed0;
 }
 
 .small-box h3{
