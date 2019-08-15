@@ -797,7 +797,7 @@ padding-left: 4px;
 }
 
 .skin-blue .main-header .navbar {
-background-color: #005191;
+background-color: #000000;
 }
 
 .slider-animate-container {
@@ -807,20 +807,20 @@ margin-top: 0px;
 
 .skin-blue .main-header .logo {
 	background-color: #f4f7fb;
-	color: #005291;
+	color: #000000;
 	/* text-transform: uppercase; */
 	border-bottom: 0 solid transparent;
 }
 
 .skin-blue .main-header .logo:hover {
 	background-color: #dfe3e6;
-	color: #005291;
+	color: #000000;
 	border-bottom: 0 solid transparent;
 }
 
 .skin-blue .main-header .navbar .sidebar-toggle {
 	color: #fffff;
-	background: #005291;
+	background: #000000;
 }
 
 .skin-blue .main-header .navbar .sidebar-toggle:hover {
@@ -900,7 +900,7 @@ background-color: #539ed0;
 	font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
 	font-size: 20px;
 	font-weight: 700;
-	color: #5a6872;
+	color: #969696;
   /* letter-spacing: 1.1px; */
   /* text-transform: uppercase; */
 	/* Smoothing */
@@ -1037,7 +1037,7 @@ ry: 0px;
 
 .skin-blue .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li:hover>a {
 	color: #fff;
-	background: #294c86;
+	background: #005291;
 	border-left-color: rgb(85, 150, 230, 0.1);
 }
 
