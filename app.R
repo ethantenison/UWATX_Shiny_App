@@ -216,7 +216,7 @@ body <- dashboardBody(
             fluidRow(
               column(width = 6,
                      h1("The 211 Community Explorer"),
-                     h4("Click a zip code to start exploring. To find out more, click the tutorial tap in the side bar"),
+                     h5("Click a zip code to start exploring. To find out more, click the tutorial tap in the side bar"),
                      hr(),
                      box(width = 12, height = "630px",
                          h4(textOutput("indicatortext")),

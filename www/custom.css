@@ -293,7 +293,7 @@
 	display: block;
 	}
 .leaflet-bar a:hover {
-	background-color: #000000;
+	background-color: #000000; /* no idea */
 	}
 .leaflet-bar a:first-child {
 	border-top-left-radius: 4px;
@@ -306,8 +306,8 @@
 	}
 .leaflet-bar a.leaflet-disabled {
 	cursor: default;
-	background-color: #000000;
-	color: #000;
+	background-color: #ffffff;/* no idea */
+	color: #fff;
 	}
 
 .leaflet-touch .leaflet-bar a {
@@ -341,7 +341,7 @@
 
 .leaflet-control-layers {
 	box-shadow: 0 1px 5px rgba(0,0,0,0.4);
-	background: #000;
+	background: #fff;
 	border-radius: 5px;
 	}
 .leaflet-control-layers-toggle {
@@ -367,8 +367,8 @@
 	}
 .leaflet-control-layers-expanded {
 	padding: 6px 10px 6px 6px;
-	color: #000;
-	background: #000;
+	color: #fff; /* layers control */
+	background: #fff;
 	}
 .leaflet-control-layers-scrollbar {
 	overflow-y: scroll;
@@ -398,14 +398,14 @@
 /* attribution and scale controls */
 
 .leaflet-container .leaflet-control-attribution {
-	background: #000;
-	background: rgba(255, 255, 255, 0.7);
+	background: #fff; /* no idea */
+	background: rgba(255, 255, 255, 0.7); 
 	margin: 0;
 	}
 .leaflet-control-attribution,
 .leaflet-control-scale-line {
 	padding: 0 5px;
-	color: #000;
+	color: #000; /* no idea */
 	}
 .leaflet-control-attribution a {
 	text-decoration: none;
@@ -434,7 +434,7 @@
 	-moz-box-sizing: border-box;
 	     box-sizing: border-box;
 
-	background: #000;
+	background: #fff; /* no idea */
 	background: rgba(0, 0, 0, 0.5);
 	}
 .leaflet-control-scale-line:not(:first-child) {
@@ -501,8 +501,8 @@
 	}
 .leaflet-popup-content-wrapper,
 .leaflet-popup-tip {
-	background: black;
-	color: #000;
+	background: black; /* no idea */
+	color: #black;
 	box-shadow: 0 3px 14px rgba(0,0,0,0.4);
 	}
 .leaflet-container a.leaflet-popup-close-button {
@@ -713,7 +713,7 @@ transition: all .2s ease-out;
 	white-space: nowrap;
 	cursor: pointer;
 	outline: 0;
-	background-color: #000000;
+	background-color: #ffffff; /* no idea */
 	border-radius: .2em;
 	zoom: 1;
 	margin-left: 5px;
@@ -746,7 +746,7 @@ visibility: visible;
 padding: 10px;
 /* top: 0px !important; */
 font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-background-color: black;
+background-color: black; /* no idea */
 min-width: 400px;
 max-width: 500px !important;
 border-radius: 3px;
@@ -806,20 +806,20 @@ margin-top: 0px;
 }
 
 .skin-blue .main-header .logo {
-	background-color: #f4f7fb;
+	background-color: #ffffff; /* UW logo */
 	color: #000000;
 	/* text-transform: uppercase; */
 	border-bottom: 0 solid transparent;
 }
 
-.skin-blue .main-header .logo:hover {
-	background-color: #000000;
+.skin-blue .main-header .logo:hover { /* UW logo when hovered */
+	background-color: #ffffff;
 	color: #000000;
 	border-bottom: 0 solid transparent;
 }
 
 .skin-blue .main-header .navbar .sidebar-toggle {
-	color: #fffff;
+	color: #ffffff; /* side toggle color */
 	background: #005291;
 }
 
@@ -854,13 +854,13 @@ padding: 6px;
 }
 
 .box.box-solid.box-info>.box-header {
-color: #fff;
+color: #000;
 background: #539ed0;
 background-color: #539ed0;
 }
 
 .small-box h3{
-	color: #ffffff !important;
+	color: #ffffff !important; /* Title of Static display */
 	font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 	/* Smoothing */
 	text-rendering: optimizeLegibility;
@@ -876,7 +876,7 @@ background-color: #539ed0;
 }
 
 .small-box p{
-	color: #ffffff !important;
+	color: #ffffff !important; /* wording in static display */
   font-size: 13px;
 }
 
@@ -900,7 +900,7 @@ background-color: #539ed0;
 	font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
 	font-size: 20px;
 	font-weight: 700;
-	color: #969696;
+	color: #969696; /* "Zip Code Tools For 2016" */
   /* letter-spacing: 1.1px; */
   /* text-transform: uppercase; */
 	/* Smoothing */
@@ -919,7 +919,7 @@ background-color: #539ed0;
 
 .skin-blue .left-side, .skin-blue .main-sidebar, .skin-blue .wrapper {
 	background-color: #005291;
-	color: #152934;
+	color: #ffffff; /* The main title */
 }
 
 .box-body {
@@ -949,7 +949,7 @@ background-color: #539ed0;
 .box-header  .box-title {
   font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 	font-weight: 900;
-	color: #fff;
+	color: #fff;/* titles of index tabs */
 }
 
 .content {
@@ -997,8 +997,7 @@ section.sidebar .shiny-bound-input.action-link {
 
 .btn {
   text-decoration: none;
-  color: #152934;
-  /* background-color: #f4f7fb; */
+  color: #ffffff; /* no idea */
   text-align: center;
   letter-spacing: .6px;
   -webkit-transition: background-color .2s ease-out;
@@ -1054,7 +1053,7 @@ ry: 0px;
 }
 
 .skin-blue .sidebar a {
-color: #fff;
+color: #fff; /* color of side bar tabs that are not selected */
 }
 
 label {
@@ -1071,13 +1070,13 @@ label {
 
 .content-wrapper, .right-side {
 	min-height: 100%;
-	background-color: #f4f7fb;
+	background-color: #000000;
 	z-index: 800;
 }
 
 .irs-grid-text {
 	bottom: 5px;
-	color: #ffffff;
+	color: #ffffff; /* color of numbers in timeline */
 }
 
 .bg-blue {
@@ -1125,12 +1124,12 @@ line-height: 1.5;
 	font-weight:900;
 	}
 
-.h1, .h2, h1, h2, {
-	color: #152934;
+.h1, .h2, h1, h2, h5, {
+	color: #ffffff; /*The subtitle for the app*/
 	}
 
-.h3, .h4, .h5, .h6, h3, h4, h5, h6 {
-	color: #5d5d5d;
+.h3, .h4, .h5, .h6, h3, h4, h6 {
+	color: #696969; /*explanation of box plot, and titles of index tabs */
 }
 
 .MathJax_Display {
@@ -1174,7 +1173,7 @@ blockquote {
 }
 
 a {
-  color: #fbfbfb;
+  color: #969696; /* No idea*/
   text-decoration: none;
 }
 
