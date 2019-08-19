@@ -2,7 +2,9 @@
 title: "UWATX- 211 Explorer ReadMe File"
 author: "Ethan Tenison"
 date: "8/11/2019"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 
@@ -28,7 +30,7 @@ demography <- bind_rows(demography_2016, demography_2017, demography_2018)
 
 The only major alterations you should be making to the code is changing the dates for the slider. Go to " max = as.Date" and change it to reflect the most recent year that is reflected in the data. 
 
-
+## List of R Packages
 
 ```{r libraries, warning=FALSE, results = "hide", message=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -62,12 +64,12 @@ demography_2016 <- rename(demography_2016, zipcode = id2)
 demography_2016 <- demography_2016 %>% mutate_each(funs(as.character))
 demography_2016 <- demography_2016 %>% mutate_each(funs(as.numeric))
 demography_2016 <- filter(demography_2016, zipcode %in% c( 78705,78617,78641,78645,78652,78653,78660,78701,78702
-                                                           ,78703,78704,78719,78721,78722,78723,78724,78725
-                                                           ,78727,78728,78730,78731,78732,78733,78734,78735
-                                                           ,78736,78738,78739,78741,78742,78743,78744,78745
-                                                           ,78746,78747,78748,78749,78750,78751,78752,78753
-                                                           ,78754,78756,78757,78758,78759,78654,78610,78621
-                                                           ,78615,78669,78737,78620,78726)) #78712 is excluded,represents UT
+                                                        ,78703,78704,78719,78721,78722,78723,78724,78725
+                                                        ,78727,78728,78730,78731,78732,78733,78734,78735
+                                                        ,78736,78738,78739,78741,78742,78743,78744,78745
+                                                        ,78746,78747,78748,78749,78750,78751,78752,78753
+                                                        ,78754,78756,78757,78758,78759,78654,78610,78621
+                                                        ,78615,78669,78737,78620,78726)) #78712 is excluded,represents UT
 
 
 demography_2016 <- select(demography_2016, zipcode, contains("latino"), -(contains("margin")), -(contains("sex")))
@@ -156,11 +158,11 @@ education_2016 <- filter(education_2016, zipcode %in% c( 78705,78617,78641,78645
                                                          ,78615,78669,78737,78620,78726)) #78712 is excluded,represents UT 
 
 education_2016 <- mutate(education_2016, less_than_highschool = rowSums(education_2016[,3:17]),
-                         high_school_GED = estimate_total_regular_high_school_diploma + estimate_total_ged_or_alternative_credential
-                         ,associates_some_college = estimate_total_some_college_1_or_more_years_no_degree +
-                           estimate_total_some_college_less_than_1_year + estimate_total_associates_degree , bachelors_plus = 
-                           estimate_total_bachelors_degree + estimate_total_masters_degree + estimate_total_professional_school_degree +
-                           estimate_total_doctorate_degree)
+                                                        high_school_GED = estimate_total_regular_high_school_diploma + estimate_total_ged_or_alternative_credential
+                                                        ,associates_some_college = estimate_total_some_college_1_or_more_years_no_degree +
+                                                        estimate_total_some_college_less_than_1_year + estimate_total_associates_degree , bachelors_plus = 
+                                                        estimate_total_bachelors_degree + estimate_total_masters_degree + estimate_total_professional_school_degree +
+                                                        estimate_total_doctorate_degree)
 education_2016 <- education_2016[,-(3:26)]
 
 
@@ -185,11 +187,11 @@ education_2017 <- filter(education_2017, zipcode %in% c( 78705,78617,78641,78645
                                                          ,78615,78669,78737,78620,78726)) #78712 is excluded,represents UT 
 
 education_2017 <- mutate(education_2017, less_than_highschool = rowSums(education_2017[,3:17]),
-                         high_school_GED = estimate_total_regular_high_school_diploma + estimate_total_ged_or_alternative_credential
-                         ,associates_some_college = estimate_total_some_college_1_or_more_years_no_degree +
-                           estimate_total_some_college_less_than_1_year + estimate_total_associates_degree , bachelors_plus = 
-                           estimate_total_bachelors_degree + estimate_total_masters_degree + estimate_total_professional_school_degree +
-                           estimate_total_doctorate_degree)
+                                                        high_school_GED = estimate_total_regular_high_school_diploma + estimate_total_ged_or_alternative_credential
+                                                        ,associates_some_college = estimate_total_some_college_1_or_more_years_no_degree +
+                                                        estimate_total_some_college_less_than_1_year + estimate_total_associates_degree , bachelors_plus = 
+                                                        estimate_total_bachelors_degree + estimate_total_masters_degree + estimate_total_professional_school_degree +
+                                                        estimate_total_doctorate_degree)
 education_2017 <- education_2017[,-(3:26)]
 
 
@@ -201,8 +203,8 @@ education <- bind_rows(education_2016, education_2017)
 
 #Transform the values to percents
 education <- transmute(education,date, zipcode, estimate_total, percent_less_than_highschool = less_than_highschool/estimate_total,
-                       percent_highschool_GED = high_school_GED/estimate_total, percent_associates_somecollege = 
-                       associates_some_college/estimate_total, percent_bachelors_plus = bachelors_plus/estimate_total)
+                                                       percent_highschool_GED = high_school_GED/estimate_total, percent_associates_somecollege = 
+                                                       associates_some_college/estimate_total, percent_bachelors_plus = bachelors_plus/estimate_total)
 
 education$percent_less_than_highschool <- percent(education$percent_less_than_highschool)
 education$percent_highschool_GED <- percent(education$percent_highschool_GED)
@@ -268,7 +270,7 @@ insurance_2017 <- select(insurance_2017, zipcode, contains("health_insurance_cov
                          -(contains("margin")), -(contains("years")), -(contains("estimate")))
 insurance_2017 <- insurance_2017[,-2]
 names(insurance_2017) <- c("zipcode", "percent_with_insurance", "percent_with_private_insurance", 
-                           "percent_with_public_insurance", "percent_with_no_insurance")
+                                                        "percent_with_public_insurance", "percent_with_no_insurance")
 
 year2017 <- ymd(20170101)
 insurance_2017 <- mutate(insurance_2017, date = year2017)  
