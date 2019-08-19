@@ -1,9 +1,8 @@
 ---
-title: "UWATX- 211 Explorer ReadMe File"
+title: "UWATX- 211 Explorer ReadMe & Data Cleaning File"
 author: "Ethan Tenison"
 date: "8/11/2019"
 output:
-  pdf_document: default
   html_document: default
 ---
 
