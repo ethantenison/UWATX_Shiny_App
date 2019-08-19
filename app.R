@@ -7,7 +7,7 @@
 #    http://shiny.rstudio.com/
 #
 
-# devtools::install_github(repo = "timelyportfolio/d3treeR", force = TRUE)
+
 
 library(shinydashboard)
 library(shiny)
@@ -282,7 +282,7 @@ body <- dashboardBody(
               # title = textOutput("ziptabtext"),
               # The id lets us use input$tabset1 on the server to find the current tab
               id = "tabset2", width = 12,
-              tabPanel(title = h3("From The Community Tab"),
+              tabPanel(title = h3("From The Community Tab"), #This is part of the Index section 
                        fluidRow(
                          div(id = "index1A", style = "padding-left: 10px !important; padding-right:10px !important",
                              box(width = 6,
@@ -497,12 +497,12 @@ server <- function (input, output, session) {
                                                 "#BoxDownload ",
                                                 "#shiny-calls-tab li"
                  ),
-                 intro = c(includeMarkdown("tooltips/year.md"),
+                 intro = c(includeMarkdown("tooltips/year.md"), #This section is used in the tutorial section 
                            includeMarkdown("tooltips/indicator.md"),
                            includeMarkdown("tooltips/map.md"),
                            includeMarkdown("tooltips/zipcodeprofile.md"),
                            includeMarkdown("tooltips/download.md"),
-                           includeMarkdown("tooltips/callstab.md")
+                           includeMarkdown("tooltips/callstab.md") #This now includes information on the index tab as well. 
                  ),
                  position = c("auto",
                               "auto",
