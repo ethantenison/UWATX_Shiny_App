@@ -131,7 +131,7 @@ demography$percent_black_alone <- paste0(demography$percent_black_alone, '%')
 demography$percent_asian_alone <- paste0(demography$percent_asian_alone, '%')
 
 #saving data 
-saveRDS(demography, file = "./demographics.RDS")
+write_rds(demography, "./demographics.RDS")
 ```
 
 ## Education 
@@ -212,7 +212,7 @@ education$percent_bachelors_plus <- percent(education$percent_bachelors_plus)
 education <- select(education, -(estimate_total))
 
 #save R object 
-saveRDS(education, file = "./education_attainment.RDS")
+write_rds(education, "./education_attainment.RDS")
 
 ```
 
@@ -283,7 +283,7 @@ insurance$percent_with_public_insurance <- paste0(insurance$percent_with_public_
 insurance$percent_with_no_insurance <- paste0(insurance$percent_with_no_insurance, '%')
 
 #save r Object
-saveRDS(insurance, file = "./health_insurance.RDS")
+write_rds(insurance, "./health_insurance.RDS")
 
 ```
 
@@ -333,7 +333,7 @@ housing_units_2017 <- mutate(housing_units_2017, date = year2017)
 housing_units <- bind_rows(housing_units_2016, housing_units_2017)
 
 #save R object file 
-saveRDS(housing_units, file = "./total_housing_units.RDS")
+write_rds(housing_units, "./total_housing_units.RDS")
 ```
 
 
@@ -393,7 +393,7 @@ medianRent_2017 <- mutate(medianRent_2017, date = year2017)
 medianRent <- bind_rows(medianRent_2016, medianRent_2017)
 
 #save R object 
-saveRDS(medianRent, file = "./median_rent.RDS")
+write_rds(medianRent, "./median_rent.RDS")
 
 ```
 
@@ -442,7 +442,7 @@ housing_median_price_2017 <- mutate(housing_median_price_2017, date = year2017)
 housing_median_price <- bind_rows(housing_median_price_2016, housing_median_price_2017)
 
 #save r object
-saveRDS(housing_median_price, file = "./median_housing_price.RDS")
+write_rds(housing_median_price, "./median_housing_price.RDS")
 
 ```
 
@@ -515,7 +515,7 @@ median_income_family <- median_income_family %>% mutate(median_monthly_family_in
 median_income_family$median_monthly_family_income<- format(median_income_family$median_monthly_family_income, digits=2, nsmall=0)
 
 #saving data 
-saveRDS(median_income_family, file = "./median_family_income.RDS")
+write_rds(median_income_family, "./median_family_income.RDS")
 
 ```
 
@@ -569,7 +569,7 @@ poverty_status_2017 <- mutate(poverty_status_2017, date = year2017)
         poverty_status <- bind_rows(poverty_status_2016, poverty_status_2017)
         
 #Save R object
-        saveRDS(poverty_status, file = "./percent_below_poverty.RDS")
+        write_rds(poverty_status, "./percent_below_poverty.RDS")
 
 ```
 
@@ -618,7 +618,7 @@ The data for 60 and above came from the ACS "AGE AND SEX" table, id = S0101. The
         over60$percent_over60 <- paste0(over60$percent_over60, '%')
         
 #Save R object 
-saveRDS(over60, file = "./over60.RDS")
+write_rds(over60, "./over60.RDS")
 
 ```
 
@@ -718,7 +718,7 @@ under6 <- bind_rows(under6_2016, under6_2017)
 under6$percent_under6 <- percent(under6$percent_under6)
 
 #save R object 
-saveRDS(under6, file = "./under6.RDS")
+write_rds(under6, "./under6.RDS")
 
 ```
 
@@ -864,7 +864,7 @@ for (i in 1:length(treemap_master$military_status)){
                   }
 }
 
-saveRDS(treemap_master, file = "./treemap_master.RDS")
+write_rds(treemap_master, "./treemap_master.RDS")
 
 ```
 
@@ -935,7 +935,7 @@ needs_zip_treemap <- rename(needs_zip_treemap, "Zip Code" = zipcode, "Value" = v
 
 
 
-saveRDS(needs_zip_treemap, file = "./needs_zip_treemap.RDS")
+write_rds(needs_zip_treemap, "./needs_zip_treemap.RDS")
 
 
 ```
@@ -1009,7 +1009,7 @@ total_211_calls <- rename(total_211_calls, zipcode = zip_code)
 total_211_calls <- select(total_211_calls, -(housing_units))
 
 #Save R object 
-saveRDS(total_211_calls, file = "./total_211_calls.RDS")
+write_rds(total_211_calls, "./total_211_calls.RDS")
 
 ```
 
@@ -1047,7 +1047,7 @@ data_4_download <- data_4_download %>% full_join(health_insurance, by = c("zipco
 data_4_download <- select(data_4_download, date, zipcode, total_calls, calls_per100HH, everything())
 data_4_download <- rename(data_4_download, Year = date)
 
-saveRDS(data_4_download, file = "./data_4_download.RDS")
+write_rds(data_4_download, "./data_4_download.RDS")
 
 ```
 
@@ -1061,7 +1061,7 @@ data <- read_rds("./data_4_download.RDS")
 summ211data <- data %>% group_by(Year) %>% summarise(total_referrals = sum(total_calls))
 
 
-saveRDS(data_4_download, file = "./summ211.RDS")
+write_rds(data_4_download, "./summ211.RDS")
 ```
 
 ## Data for use in the app 
@@ -1142,6 +1142,6 @@ data_4_analysis <- st_sf(data_4_analysis)
 
 
 #Save R object 
-saveRDS(data_4_analysis, file = "./data_4_analysis.RDS")
+write_rds(data_4_analysis, "./data_4_analysis.RDS")
 
 ```
