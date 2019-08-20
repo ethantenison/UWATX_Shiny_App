@@ -5,8 +5,8 @@ account: uwatx
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 1097802
-bundleId: 2335657
+bundleId: 2338495
 url: https://uwatx.shinyapps.io/211_attempt6/
-when: 1566251752.27167
+when: 1566326672.3608
 asMultiple: FALSE
 asStatic: FALSE

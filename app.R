@@ -47,12 +47,12 @@ full_zips_list <- "78705|78617|78641|78645|78652|78653|78660|78701|78702|78703|7
 
 filter_out <- "78712|78743"
 
-treemap_master <- read_rds("data/treemap_master.rds") %>%
+treemap_master <- read_rds("./data/treemap_master.rds") %>%
   ungroup() %>%
   mutate(age = as.character(age))
 
 #TREEMAP DATA - ZIP & NEEDS
-needs_zip_treemap <- read_rds("data/needs_zip_treemap.rds") %>%
+needs_zip_treemap <- read_rds("./data/needs_zip_treemap.rds") %>%
   ungroup() %>% 
   janitor::clean_names() %>%
   mutate(day = as.character("01"),
@@ -61,17 +61,17 @@ needs_zip_treemap <- read_rds("data/needs_zip_treemap.rds") %>%
   mutate(date = as.Date(date, "%Y-%m-%d")) %>% 
   rename(year = date)
 
-travis_dl <- read_rds("data/data_4_download.rds")
+travis_dl <- read_rds("./data/data_4_download.rds")
 
-travis <- read_rds("data/data_4_analysis.rds") %>%
+travis <- read_rds("./data/data_4_analysis.rds") %>%
   filter(!str_detect(zipcode, filter_out))  %>% 
   group_by(Year, measure) %>% 
   mutate(rank = dense_rank(desc(value))) %>% 
   ungroup()
 
-travis_summ <- read_rds("data/summ211.rds")
+travis_summ <- read_rds("./data/summ211.rds")
 
-travis_county_sf <- read_rds("data/traviscounty_boundary.rds")
+travis_county_sf <- read_rds("./data/traviscounty_boundary.rds")
 
 
 # ------------------------------- #
