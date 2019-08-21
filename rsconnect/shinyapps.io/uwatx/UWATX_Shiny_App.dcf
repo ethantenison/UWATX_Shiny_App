@@ -4,9 +4,9 @@ username:
 account: uwatx
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
-appId: 1104001
-bundleId: 2342890
+appId: 1104208
+bundleId: 2342978
 url: https://uwatx.shinyapps.io/UWATX_Shiny_App/
-when: 1566423709.58441
+when: 1566425960.82281
 asMultiple: FALSE
 asStatic: FALSE
