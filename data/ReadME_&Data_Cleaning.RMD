@@ -131,7 +131,7 @@ demography$percent_black_alone <- paste0(demography$percent_black_alone, '%')
 demography$percent_asian_alone <- paste0(demography$percent_asian_alone, '%')
 
 #saving data 
-write_rds(demography, "./demographics.RDS")
+write_rds(demography, "./demographics.rds")
 ```
 
 ## Education 
@@ -212,7 +212,7 @@ education$percent_bachelors_plus <- percent(education$percent_bachelors_plus)
 education <- select(education, -(estimate_total))
 
 #save R object 
-write_rds(education, "./education_attainment.RDS")
+write_rds(education, "./education_attainment.rds")
 
 ```
 
@@ -283,7 +283,7 @@ insurance$percent_with_public_insurance <- paste0(insurance$percent_with_public_
 insurance$percent_with_no_insurance <- paste0(insurance$percent_with_no_insurance, '%')
 
 #save r Object
-write_rds(insurance, "./health_insurance.RDS")
+write_rds(insurance, "./health_insurance.rds")
 
 ```
 
@@ -333,7 +333,7 @@ housing_units_2017 <- mutate(housing_units_2017, date = year2017)
 housing_units <- bind_rows(housing_units_2016, housing_units_2017)
 
 #save R object file 
-write_rds(housing_units, "./total_housing_units.RDS")
+write_rds(housing_units, "./total_housing_units.rds")
 ```
 
 
@@ -393,7 +393,7 @@ medianRent_2017 <- mutate(medianRent_2017, date = year2017)
 medianRent <- bind_rows(medianRent_2016, medianRent_2017)
 
 #save R object 
-write_rds(medianRent, "./median_rent.RDS")
+write_rds(medianRent, "./median_rent.rds")
 
 ```
 
@@ -442,7 +442,7 @@ housing_median_price_2017 <- mutate(housing_median_price_2017, date = year2017)
 housing_median_price <- bind_rows(housing_median_price_2016, housing_median_price_2017)
 
 #save r object
-write_rds(housing_median_price, "./median_housing_price.RDS")
+write_rds(housing_median_price, "./median_housing_price.rds")
 
 ```
 
@@ -515,7 +515,7 @@ median_income_family <- median_income_family %>% mutate(median_monthly_family_in
 median_income_family$median_monthly_family_income<- format(median_income_family$median_monthly_family_income, digits=2, nsmall=0)
 
 #saving data 
-write_rds(median_income_family, "./median_family_income.RDS")
+write_rds(median_income_family, "./median_family_income.rds")
 
 ```
 
@@ -569,7 +569,7 @@ poverty_status_2017 <- mutate(poverty_status_2017, date = year2017)
         poverty_status <- bind_rows(poverty_status_2016, poverty_status_2017)
         
 #Save R object
-        write_rds(poverty_status, "./percent_below_poverty.RDS")
+        write_rds(poverty_status, "./percent_below_poverty.rds")
 
 ```
 
@@ -618,7 +618,7 @@ The data for 60 and above came from the ACS "AGE AND SEX" table, id = S0101. The
         over60$percent_over60 <- paste0(over60$percent_over60, '%')
         
 #Save R object 
-write_rds(over60, "./over60.RDS")
+write_rds(over60, "./over60.rds")
 
 ```
 
@@ -718,7 +718,7 @@ under6 <- bind_rows(under6_2016, under6_2017)
 under6$percent_under6 <- percent(under6$percent_under6)
 
 #save R object 
-write_rds(under6, "./under6.RDS")
+write_rds(under6, "./under6.rds")
 
 ```
 
@@ -864,7 +864,7 @@ for (i in 1:length(treemap_master$military_status)){
                   }
 }
 
-write_rds(treemap_master, "./treemap_master.RDS")
+write_rds(treemap_master, "./treemap_master.rds")
 
 ```
 
@@ -935,7 +935,7 @@ needs_zip_treemap <- rename(needs_zip_treemap, "Zip Code" = zipcode, "Value" = v
 
 
 
-write_rds(needs_zip_treemap, "./needs_zip_treemap.RDS")
+write_rds(needs_zip_treemap, "./needs_zip_treemap.rds")
 
 
 ```
@@ -967,7 +967,7 @@ icarol_2016 <- mutate(icarol_2016, date = date2016)
 
 calls2016 <- distinct(icarol_2016, call_report_number, .keep_all =  TRUE)
 calls2016 <- calls2016 %>% group_by(zip_code) %>% summarise(total_calls = n())
-total_housing_units <- read_rds("./total_housing_units.RDS")
+total_housing_units <- read_rds("./total_housing_units.rds")
 date2016 <- ymd(20160101)
 calls2016 <- mutate(calls2016, date = date2016)
 calls2016 <- left_join(calls2016, total_housing_units, by = c("zip_code" = "zipcode", "date"))
@@ -996,7 +996,7 @@ icarol_2017 <- mutate(icarol_2017, date = date2017)
 
 calls2017 <- distinct(icarol_2017, call_report_number, .keep_all =  TRUE)
 calls2017 <- calls2017 %>% group_by(zip_code) %>% summarise(total_calls = n())
-total_housing_units <- read_rds("./total_housing_units.RDS")
+total_housing_units <- read_rds("./total_housing_units.rds")
 date2017 <- ymd(20170101)
 calls2017 <- mutate(calls2017, date = date2017)
 calls2017 <- left_join(calls2017, total_housing_units, by = c("zip_code" = "zipcode", "date"))
@@ -1009,7 +1009,7 @@ total_211_calls <- rename(total_211_calls, zipcode = zip_code)
 total_211_calls <- select(total_211_calls, -(housing_units))
 
 #Save R object 
-write_rds(total_211_calls, "./total_211_calls.RDS")
+write_rds(total_211_calls, "./total_211_calls.rds")
 
 ```
 
@@ -1019,17 +1019,17 @@ This r object uses most of the tables created above. The data was joined using t
 
 ```{R data4download, warning=FALSE}
 #Reading the existing data 
-demographics <- read_rds("./demographics.RDS")
-education_attainment <- read_rds("./education_attainment.RDS")
-health_insurance <- read_rds("./health_insurance.RDS")
-median_family_income <- read_rds("./median_family_income.RDS")
-median_housing_price <- read_rds("./median_housing_price.RDS")
-median_rent <- read_rds("./median_rent.RDS")
-over60 <- read_rds("./over60.RDS")
-percent_below_poverty <- read_rds("./percent_below_poverty.RDS")
-total_housing_units <- read_rds("./total_housing_units.RDS")
-under6 <- read_rds("./under6.RDS")
-total_211_calls <- read_rds("./total_211_calls.RDS")
+demographics <- read_rds("./demographics.rds")
+education_attainment <- read_rds("./education_attainment.rds")
+health_insurance <- read_rds("./health_insurance.rds")
+median_family_income <- read_rds("./median_family_income.rds")
+median_housing_price <- read_rds("./median_housing_price.rds")
+median_rent <- read_rds("./median_rent.rds")
+over60 <- read_rds("./over60.rds")
+percent_below_poverty <- read_rds("./percent_below_poverty.rds")
+total_housing_units <- read_rds("./total_housing_units.rds")
+under6 <- read_rds("./under6.rds")
+total_211_calls <- read_rds("./total_211_calls.rds")
 
 #joining the data
 data_4_download <- full_join(demographics, education_attainment, by = c("zipcode", "date"))
@@ -1047,7 +1047,7 @@ data_4_download <- data_4_download %>% full_join(health_insurance, by = c("zipco
 data_4_download <- select(data_4_download, date, zipcode, total_calls, calls_per100HH, everything())
 data_4_download <- rename(data_4_download, Year = date)
 
-write_rds(data_4_download, "./data_4_download.RDS")
+write_rds(data_4_download, "./data_4_download.rds")
 
 ```
 
@@ -1056,12 +1056,12 @@ write_rds(data_4_download, "./data_4_download.RDS")
 
 This R object used the data_4_download object to sum up the total referrals per zip code, irrespective of the need name. This information appears in the static section of the Shiny app.
 ```{r total 211 referrals, warning=FALSE}
-data <- read_rds("./data_4_download.RDS")
+data <- read_rds("./data_4_download.rds")
 
 summ211data <- data %>% group_by(Year) %>% summarise(total_referrals = sum(total_calls))
 
 
-write_rds(data_4_download, "./summ211.RDS")
+write_rds(data_4_download, "./summ211.rds")
 ```
 
 ## Data for use in the app 
@@ -1074,7 +1074,7 @@ Click on the Shape file zip download.
 
 ```{R data4analysis, warning=FALSE}
 #reading the existing data 
-data <- read_rds("./data_4_download.RDS")
+data <- read_rds("./data_4_download.rds")
 
 convert_columns <- colnames(data[3:25]) #If you add a variable you need to change the number of columns and you also need to change new.row.names
 
@@ -1142,6 +1142,6 @@ data_4_analysis <- st_sf(data_4_analysis)
 
 
 #Save R object 
-write_rds(data_4_analysis, "./data_4_analysis.RDS")
+write_rds(data_4_analysis, "./data_4_analysis.rds")
 
 ```
