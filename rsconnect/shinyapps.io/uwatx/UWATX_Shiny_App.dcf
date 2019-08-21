@@ -1,0 +1,12 @@
+name: UWATX_Shiny_App
+title: UWATX_Shiny_App
+username:
+account: uwatx
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1100690
+bundleId: 2338967
+url: https://uwatx.shinyapps.io/UWATX_Shiny_App/
+when: 1566336933.05747
+asMultiple: FALSE
+asStatic: FALSE
