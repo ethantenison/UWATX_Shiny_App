@@ -1,0 +1,12 @@
+name: 211CallExplorer
+title: 211CallExplorer
+username:
+account: uwatx
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1107324
+bundleId: 2346289
+url: https://uwatx.shinyapps.io/211CallExplorer/
+when: 1566506640.77059
+asMultiple: FALSE
+asStatic: FALSE
